@@ -26,6 +26,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import UserScreen from './src/screens/userscreen/UserScreen';
+import Navigation from './src/navigation/Navigation';
 
 
 function App(): JSX.Element {
@@ -38,7 +39,7 @@ function App(): JSX.Element {
   return (
     <SafeAreaView style={{flex:1}}>
       {/* <HomeScreen/> */}
-      <UserScreen/>
+      <Navigation/>
     </SafeAreaView>
   );
 }

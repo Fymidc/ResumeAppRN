@@ -3,7 +3,12 @@ import React from 'react'
 import Header from '../components/Header'
 import ResumeTemplate from '../components/ResumeTemplate'
 
+
+
 const HomeScreen = () => {
+
+
+
   return (
     <View style={{ flex: 1 }} >
       <Header />
