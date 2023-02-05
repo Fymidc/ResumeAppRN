@@ -7,21 +7,31 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../types';
 
 
-type ProfileScreenNavigationProp = NativeStackNavigationProp<
+type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
   'HomeS'
 >;
 
 const ResumeTemplate = () => {
 
-  const navigation = useNavigation<ProfileScreenNavigationProp>()
+  const navigation = useNavigation<HomeScreenNavigationProp>()
 
   const openup=()=>{
     navigation.navigate("ResumeCreate", { sort: 'latest' })
   }
 
   return (
-    <TouchableOpacity onPress={()=>openup()} activeOpacity={0.9} style={{flex:1,backgroundColor:"green",marginHorizontal:5,height:400,width:250}} >
+    <TouchableOpacity onPress={()=>openup()} activeOpacity={0.9} 
+    style={{flex:1,backgroundColor:"green",
+    marginHorizontal:5,
+    marginVertical:5,
+    height:450,
+    width:280,
+    borderRadius:15,
+    elevation:3
+    
+    }} >
+
       <Text>ResumeTemplate</Text>
     </TouchableOpacity>
   )

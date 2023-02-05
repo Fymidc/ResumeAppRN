@@ -6,17 +6,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import type {NativeStackScreenProps} from "@react-navigation/native-stack"
 import HomeScreen from '../screens/HomeScreen'
-import ResumeScreen from '../screens/resumeTemplateScreens/ResumeScreen'
+import ResumeScreen from '../screens/userscreen/ResumeScreen'
 import UserScreen from '../screens/userscreen/UserScreen'
 import ResumeCreateScreen from '../screens/resumeTemplateScreens/ResumeCreateScreen'
-import { HomeStackParamList, ProfileStackParamList, TabStackParamList } from '../types'
+import { HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackParamList, TabStackParamList } from '../types'
+import FirstFragment from '../screens/resumeTemplateScreens/fragments/FirstFragment'
+import SecondFragment from '../screens/resumeTemplateScreens/fragments/SecondFragment'
+import ThirdFragment from '../screens/resumeTemplateScreens/fragments/ThirdFragment'
 
 
 
 const Tab = createBottomTabNavigator<TabStackParamList>()
 const HomeScreenStack = createNativeStackNavigator<HomeStackParamList>()
 const ProfileScreenStack = createNativeStackNavigator<ProfileStackParamList>()
-
+const ResumeScreenStack = createNativeStackNavigator<ResumeStackParamList>()
+const Stack = createNativeStackNavigator<StackParamList>()
 
 
 function HomeStack() {
@@ -33,8 +37,8 @@ function HomeStack() {
         }}
       />
       <HomeScreenStack.Screen
-        name="ResumeTemplate"
-        component={ResumeCreateScreen}
+        name="ResumeCreate"
+        component={ResumeStack}
         options={() => {
           return {
             
@@ -75,27 +79,83 @@ function ProfileStack() {
   )
 }
 
-const Navigation = () => {
+function ResumeStack() {
 
+  return (
+    <ResumeScreenStack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName="FirstFragment"
+       
+      // tabBar={props => <StackBar {...props} />}
+      >
+        <ResumeScreenStack.Screen name="FirstFragment" component={FirstFragment} />
+        <ResumeScreenStack.Screen 
+        options={() => {
+          return {
+            
+            animation: "slide_from_right",
+            headerShown: false
+          }
+        }}
+         name="SecondFragment" component={SecondFragment}  />
+        <ResumeScreenStack.Screen 
+        options={() => {
+          return {
+            
+            animation: "slide_from_right",
+            headerShown: false
+          }
+        }}
+         name="ThirdFragment" component={ThirdFragment}  />
+
+        
+      </ResumeScreenStack.Navigator>
+  )
+}
+
+function TabStack() {
 
   const Placeholder = () => { return (<View />) }
 
   return (
+    <Tab.Navigator
+    screenOptions={{ headerShown: false }}
+    initialRouteName="HomeTab"
+   
+  // tabBar={props => <TabBar {...props} />}
+  >
+    <Tab.Screen name="HomeTab" component={HomeStack} />
+    <Tab.Screen  name="ProfileTab" component={ProfileStack}  />
+
+   
+    <Tab.Screen name="Settings" component={Placeholder} />
+    
+
+  </Tab.Navigator>
+  )
+}
+
+
+
+const Navigation = () => {
+
+
+  
+
+  return (
     <NavigationContainer>
-        <Tab.Navigator
+        <Stack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName="Home"
        
-      // tabBar={props => <TabBar {...props} />}
+      // tabBar={props => <StackBar {...props} />}
       >
-        <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen  name="Profile" component={ProfileStack}  />
+        <Stack.Screen name="Home" component={TabStack} />
+        <Stack.Screen  name="Profile" component={ProfileStack}  />
+        <Stack.Screen  name="Resume" component={ResumeStack}  />
 
-       
-        <Tab.Screen name="Settings" component={Placeholder} />
         
-
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

@@ -13,8 +13,8 @@ const HomeScreen = () => {
     <View style={{ flex: 1 }} >
       <Header />
       
-      <View style={{backgroundColor:"yellow",marginVertical:15}} >
-      <Text style={{fontSize:16,paddingHorizontal:20}} >Choose a Template</Text>
+      <View style={{marginVertical:15,marginLeft:10}} >
+      <Text style={{fontSize:17,paddingHorizontal:20}} >Choose a Template</Text>
         <ScrollView horizontal contentContainerStyle={{marginTop:15}} showsHorizontalScrollIndicator={false} 
         alwaysBounceHorizontal={true}
         >
