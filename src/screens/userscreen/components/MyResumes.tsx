@@ -1,12 +1,18 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import EmptyResume from "../../../images/emptyimage.svg"
 
 const MyResumes = () => {
   return (
-    <View>
-      <Text>MyResumes</Text>
+    <View style={{ aspectRatio: 1,width:"45%",height:"52%", marginHorizontal: 5, marginVertical: 15 }} >
+      <EmptyResume
+       width="100%"
+       height="100%"
+
+        />
     </View>
   )
 }
 
 export default MyResumes
+//image can be better 

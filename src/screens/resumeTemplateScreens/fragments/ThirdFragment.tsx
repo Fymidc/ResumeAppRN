@@ -21,13 +21,7 @@ const ThirdFragment = () => {
 
                 <View>
 
-                    <TouchableOpacity style={{ backgroundColor: "black" }} onPress={() => navigation.navigate("SecondFragment")} >
-                        <Text style={{ color: "white" }} >PREVIOUS</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-
-                    <TouchableOpacity style={{ backgroundColor: "black" }} onPress={() => navigation.navigate("Profile")} >
+                    <TouchableOpacity style={{ backgroundColor: "black" }} onPress={() => navigation.navigate("ProfileS")} >
                         <Text style={{ color: "white" }} >DONE</Text>
                     </TouchableOpacity>
                 </View>
