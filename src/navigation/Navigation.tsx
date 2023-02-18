@@ -12,6 +12,7 @@ import { HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackP
 import FirstFragment from '../screens/resumeTemplateScreens/fragments/FirstFragment'
 import SecondFragment from '../screens/resumeTemplateScreens/fragments/SecondFragment'
 import ThirdFragment from '../screens/resumeTemplateScreens/fragments/ThirdFragment'
+import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
 
 
 
@@ -146,6 +147,16 @@ const Navigation = () => {
             return {
 
               animation: "slide_from_right",
+              headerShown: false
+            }
+          }}
+        />
+        <Stack.Screen name="ResumeDownload"
+          component={ResumeDownloadScreen}
+          options={() => {
+            return {
+
+              animation: "slide_from_bottom",
               headerShown: false
             }
           }}

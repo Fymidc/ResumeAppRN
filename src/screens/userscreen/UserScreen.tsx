@@ -37,7 +37,7 @@ const UserScreen = ({ route }: Props) => {
 
             <View style={{ marginTop: 20 }} >
                 <Text style={{ paddingHorizontal: 20 ,fontSize:20,color:"black",fontWeight:"700"}} >My CV's</Text>
-                <View style={{  padding: 10, flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }} >
+                <View style={{ padding: 10, flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }} >
                  <MyResumes/>
                  <MyResumes/>
                  <MyResumes/>

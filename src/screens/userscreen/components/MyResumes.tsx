@@ -4,7 +4,7 @@ import EmptyResume from "../../../images/emptyimage.svg"
 
 const MyResumes = () => {
   return (
-    <View style={{ aspectRatio: 1,width:"45%",height:"52%", marginHorizontal: 5, marginVertical: 15 }} >
+    <View style={{overflow:"hidden",borderRadius:25, aspectRatio: 1,width:"45%",height:"52%", marginHorizontal: 5, marginVertical: 15 }} >
       <EmptyResume
        width="100%"
        height="100%"

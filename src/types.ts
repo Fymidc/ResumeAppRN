@@ -1,3 +1,34 @@
+//formik types
+export interface FormikValueProps{
+  name: string
+  jobtitle: string
+  email: string
+  city: string
+  phone: string
+  schoolname:string
+  schoolcountry:string
+  schoolstartdate:string
+  schoolenddate:string
+  companyname:string
+  jobposition:string
+  jobstartdate:string
+  jobenddate:string
+  jobdescription:string
+  linkname:string
+  linkurl:string
+  skillname:string
+  skilllevel:string
+  languagename:string
+  languagelevel:string
+  projectname:string
+  projectlink:string
+  projectdescription:string
+
+}
+
+
+//resume
+
 export interface Resume {
   id: string;
   resumeName: string;
@@ -134,4 +165,5 @@ export type StackParamList = {
     Home:undefined
     Profile:undefined
     ResumeCreate:undefined
+    ResumeDownload:{firstname:string}
   };

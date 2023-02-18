@@ -51,14 +51,14 @@ export default App;
 //navigation setup **
 //tab navigation **
 
-//complete homescreen design 
-// complete user screen design
+//complete homescreen design **
+// complete user screen design **
 //create login screen and signup with formi and yup
 //redux setup 
-//create types for resume
+//create types for resume**
 //
-//create templatescreens for input section 
+//create templatescreens for input section **
 //try fragments slide animation **
-//complete resumecreatescreen and design
+//complete resumecreatescreen and design**
 //try save as pdf 
 
