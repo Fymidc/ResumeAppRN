@@ -148,7 +148,7 @@ export type TabStackParamList = {
 export type HomeStackParamList = {
   
     HomeS:undefined
-    ResumeCreate:{sort:string}
+    ResumeCreate:{id:string|undefined}
    
   };
 export type ProfileStackParamList = {
@@ -164,6 +164,99 @@ export type ResumeStackParamList = {
 export type StackParamList = {
     Home:undefined
     Profile:undefined
-    ResumeCreate:undefined
+    ResumeCreate:{id:string}
     ResumeDownload:{firstname:string}
+  };
+
+  //initial value of formik
+
+  export const initialValue = {
+    id: "",
+    resumeName: "resume1",
+    createInfo: {
+      date: "",
+      isUpdated: false,
+    },
+    mainInfo: {
+      sectionName: "mainInfo",
+      name: "",
+      phone: "",
+      city: "",
+      jobTitle: "",
+      email: "",
+      links: [
+        {
+          name: "",
+          url: "",
+        },
+      ],
+    },
+    profileInfo: {
+      sectionName: "",
+      profileDescription: "",
+    },
+    educationInfo: {
+      sectionName: "profileInfo",
+      schoolName: "",
+      degree: "",
+      fieldOfStudy: "",
+      startDate: {
+        day: "",
+        month: "",
+        year: "",
+      },
+      endDate: {
+        day: "",
+        month: "",
+        year: "",
+      },
+      schoolCity: "",
+      schoolCountry: "",
+    },
+    ExperienceInfo: {
+      sectionName: "experienceInfo",
+      companyName: "",
+      position: "",
+      jobTitle: "",
+      startDate: {
+        day: "",
+        month: "",
+        year: "",
+      },
+      endDate: {
+        day: "",
+        month: "",
+        year: "",
+      },
+      jobDescription: "",
+    },
+    Skills: {
+      sectionName: "Skills",
+      skills: [
+        {
+          skillName: "",
+          skillLevel: "",
+        },
+      ],
+    },
+    Languages: {
+      sectionName: "languages",
+      languages: [
+        {
+          languageName: "",
+          languageLevel: "",
+        },
+      ],
+    },
+    Projects: {
+      sectionName: "projects",
+      projects: [
+        {
+          projectName: "",
+          projectDescription: "",
+          projectLink: "",
+        },
+      ],
+    }
+
   };

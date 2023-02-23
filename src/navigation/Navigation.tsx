@@ -9,9 +9,6 @@ import ResumeScreen from '../screens/userscreen/ResumeScreen'
 import UserScreen from '../screens/userscreen/UserScreen'
 import ResumeCreateScreen from '../screens/resumeTemplateScreens/ResumeCreateScreen'
 import { HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackParamList, TabStackParamList } from '../types'
-import FirstFragment from '../screens/resumeTemplateScreens/fragments/FirstFragment'
-import SecondFragment from '../screens/resumeTemplateScreens/fragments/SecondFragment'
-import ThirdFragment from '../screens/resumeTemplateScreens/fragments/ThirdFragment'
 import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
 
 

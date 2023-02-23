@@ -1,10 +1,13 @@
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import Header from '../components/Header'
 import MainScreen from "../images/mainscreen.svg"
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../types';
+import { HomeStackParamList, initialValue, Resume } from '../types';
 import { useNavigation } from '@react-navigation/native'
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { addResume, selectAllResumes } from '../store/reducer/slices/ResumeSlice';
+
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -12,12 +15,28 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 const HomeScreen = () => {
-
+  const [resumeCreted, setresumeCreted] = useState(false)
+  const dispatch = useAppDispatch();
+  const resumes = useAppSelector(state=>state.reducer);
   const navigation = useNavigation<HomeScreenNavigationProp>()
 
+ console.log(resumes )
+ let lastCreatedResume: Resume | undefined;
   const createScreen = () => {
-
+    setresumeCreted(true)
+    dispatch(addResume(initialValue))
   }
+
+  useEffect(() => {
+    lastCreatedResume = resumes.slice(-1)[0];
+    console.log("lastcreated",lastCreatedResume)
+    if (resumeCreted) {
+      setTimeout(() => {
+        navigation.navigate("ResumeCreate", { id:lastCreatedResume?.id})
+      }, 500);
+    }
+      }, [resumeCreted])
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }} >
@@ -46,7 +65,7 @@ const HomeScreen = () => {
             style={styles.button}
             activeOpacity={0.7}
 
-            onPress={() => navigation.navigate("ResumeCreate", { sort: 'latest' })} >
+            onPress={() => createScreen() }  >
 
             <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Next</Text>
           </TouchableOpacity>
