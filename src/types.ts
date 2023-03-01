@@ -73,8 +73,8 @@ export interface EducationInfo {
   schoolName: string;
   degree: string;
   fieldOfStudy: string;
-  startDate: Date;
-  endDate: Date;
+  startDate:  string;
+  endDate?:  string;
   schoolCity: string;
   schoolCountry: string;
 }
@@ -83,8 +83,8 @@ export interface ExperienceInfo {
   sectionName: string;
   companyName: string;
   position: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string ;
+  endDate?:  string ;
   jobDescription: string;
 }
 
@@ -99,7 +99,7 @@ export interface Education {
   degree: string;
   fieldOfStudy: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   schoolCity: string;
   schoolCountry: string;
 }
@@ -200,16 +200,8 @@ export type StackParamList = {
       schoolName: "",
       degree: "",
       fieldOfStudy: "",
-      startDate: {
-        day: "",
-        month: "",
-        year: "",
-      },
-      endDate: {
-        day: "",
-        month: "",
-        year: "",
-      },
+        startDate: "",
+      endDate: "",
       schoolCity: "",
       schoolCountry: "",
     },
@@ -218,16 +210,8 @@ export type StackParamList = {
       companyName: "",
       position: "",
       jobTitle: "",
-      startDate: {
-        day: "",
-        month: "",
-        year: "",
-      },
-      endDate: {
-        day: "",
-        month: "",
-        year: "",
-      },
+      startDate: "",
+      endDate: "",
       jobDescription: "",
     },
     Skills: {

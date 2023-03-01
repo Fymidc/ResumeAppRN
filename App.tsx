@@ -53,12 +53,25 @@ export default App;
 
 //complete homescreen design **
 // complete user screen design **
-//create login screen and signup with formi and yup
-//redux setup 
+//redux setup **
 //create types for resume**
 //
 //create templatescreens for input section **
 //try fragments slide animation **
 //complete resumecreatescreen and design**
-//try save as pdf 
+
+//fix the date start date and end date if there is no end date put there
+  // currently working here button or something
+  //develop dowload screen
+  //add view shot library to the app and try it 
+  //create login screen and signup with formi and yup
+  // add firebase email auth
+  // add real time data base and save resumes to database with user id 
+  // the get the data from firabase and show them in profile screen
+  //add firebase ad mob
+  //fix the ui of the tab bar
+  //add animation to the proggress bar and the tab bar
+  //add some fonts and fix some colors of the app 
+  //deploy it
+
 

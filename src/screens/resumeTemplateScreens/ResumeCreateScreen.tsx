@@ -83,8 +83,8 @@ const ResumeCreateScreen = (props: Props) => {
     setProgress((prev) => (currTab + 1) * tabPercentRate);
   }, [currTab]);
 
-  //disable remove buttons if there is one item 
-  //check the all inputs and show them in resume download screen 
+
+  
 
   return (
     <SafeAreaView style={{ flex: 1 }} >
@@ -152,7 +152,7 @@ const ResumeCreateScreen = (props: Props) => {
                           <TextInput
                             style={styles.input}
                             placeholder='Name'
-                            autoCapitalize='none'
+                            autoCapitalize='words'
                             value={values.mainInfo.name}
                             onChangeText={handleChange("mainInfo.name")}
 
@@ -207,6 +207,19 @@ const ResumeCreateScreen = (props: Props) => {
                           />
                           {(errors.phone) && <Text style={styles.error} >{errors.phone}</Text>}
                         </View>
+                        <View style={styles.inputContainer}  >
+                          <Text style={{ fontSize: 19, fontWeight: "700" }} >About me</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder='Tell us about yourself in a short sentences.'
+                            multiline
+                            maxLength={180}
+                            value={values.profileInfo.profileDescription}
+                            onChangeText={handleChange("profileInfo.profileDescription")}
+
+                          />
+                          {(errors.aboutme) && <Text style={styles.error} >{errors.aboutme}</Text>}
+                        </View>
                       </ScrollView>
                     }
 
@@ -221,11 +234,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='School Name'
 
-                            value={values.educationInfo.schoolname}
-                            onChangeText={handleChange("educationInfo.schoolname")}
+                            value={values.educationInfo.schoolName}
+                            onChangeText={handleChange("educationInfo.schoolName")}
 
                           />
-                          {(errors.schoolname) && <Text style={styles.error} >{errors.schoolname}</Text>}
+                          {(errors.schoolName) && <Text style={styles.error} >{errors.schoolName}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >School Country</Text>
@@ -233,11 +246,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='School Country'
 
-                            value={values.educationInfo.schoolcountry}
-                            onChangeText={handleChange("educationInfo.schoolcountry")}
+                            value={values.educationInfo.schoolCountry}
+                            onChangeText={handleChange("educationInfo.schoolCountry")}
 
                           />
-                          {(errors.schoolcountry) && <Text style={styles.error} >{errors.schoolcountry}</Text>}
+                          {(errors.schoolCountry) && <Text style={styles.error} >{errors.schoolCountry}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >Start Date</Text>
@@ -245,11 +258,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Start Date'
                             autoCapitalize='none'
-                            value={values.educationInfo.startdate}
-                            onChangeText={handleChange("educationInfo.schoolstartdate")}
+                            value={values.educationInfo.startDate}
+                            onChangeText={handleChange("educationInfo.startDate")}
 
                           />
-                          {(errors.startdate) && <Text style={styles.error} >{errors.startdate}</Text>}
+                          {(errors.startDate) && <Text style={styles.error} >{errors.startDate}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >End date</Text>
@@ -257,11 +270,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='End date'
 
-                            value={values.educationInfo.enddate}
-                            onChangeText={handleChange("educationInfo.schoolenddate")}
+                            value={values.educationInfo.endDate}
+                            onChangeText={handleChange("educationInfo.endDate")}
 
                           />
-                          {(errors.enddate) && <Text style={styles.error} >{errors.enddate}</Text>}
+                          {(errors.endDate) && <Text style={styles.error} >{errors.endDate}</Text>}
                         </View>
 
                       </ScrollView>
@@ -278,11 +291,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Company Name'
                             autoCapitalize='none'
-                            value={values.ExperienceInfo.companyname}
-                            onChangeText={handleChange("ExperienceInfo.companyname")}
+                            value={values.ExperienceInfo.companyName}
+                            onChangeText={handleChange("ExperienceInfo.companyName")}
 
                           />
-                          {(errors.companyname) && <Text style={styles.error} >{errors.companyname}</Text>}
+                          {(errors.companyName) && <Text style={styles.error} >{errors.companyName}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >Job Position</Text>
@@ -290,11 +303,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Job Position'
 
-                            value={values.ExperienceInfo.jobposition}
-                            onChangeText={handleChange("ExperienceInfo.jobposition")}
+                            value={values.ExperienceInfo.position}
+                            onChangeText={handleChange("ExperienceInfo.position")}
 
                           />
-                          {(errors.jobposition) && <Text style={styles.error} >{errors.jobposition}</Text>}
+                          {(errors.position) && <Text style={styles.error} >{errors.position}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >Start Date</Text>
@@ -302,11 +315,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Start Date'
                             autoCapitalize='none'
-                            value={values.ExperienceInfo.startdate}
-                            onChangeText={handleChange("ExperienceInfo.jobstartdate")}
+                            value={values.ExperienceInfo.startDate}
+                            onChangeText={handleChange("ExperienceInfo.startDate")}
 
                           />
-                          {(errors.startdate) && <Text style={styles.error} >{errors.startdate}</Text>}
+                          {(errors.startDate) && <Text style={styles.error} >{errors.startDate}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >End date</Text>
@@ -314,11 +327,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='End date'
 
-                            value={values.ExperienceInfo.enddate}
-                            onChangeText={handleChange("ExperienceInfo.jobenddate")}
+                            value={values.ExperienceInfo.endDate}
+                            onChangeText={handleChange("ExperienceInfo.endDate")}
 
                           />
-                          {(errors.enddate) && <Text style={styles.error} >{errors.enddate}</Text>}
+                          {(errors.endDate) && <Text style={styles.error} >{errors.endDate}</Text>}
                         </View>
                         <View style={styles.inputContainer}  >
                           <Text style={{ fontSize: 19, fontWeight: "700" }} >Job Description</Text>
@@ -326,11 +339,11 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Job Description'
 
-                            value={values.ExperienceInfo.jobdescription}
-                            onChangeText={handleChange("ExperienceInfo.jobdescription")}
+                            value={values.ExperienceInfo.jobDescription}
+                            onChangeText={handleChange("ExperienceInfo.jobDescription")}
 
                           />
-                          {(errors.jobdescription) && <Text style={styles.error} >{errors.jobdescription}</Text>}
+                          {(errors.jobDescription) && <Text style={styles.error} >{errors.jobDescription}</Text>}
                         </View>
 
                       </ScrollView>
@@ -373,8 +386,7 @@ const ResumeCreateScreen = (props: Props) => {
                                     {(errors.linkurl) && <Text style={styles.error} >{errors.linkurl}</Text>}
                                   </View>
                                   <View style={{ flex: 1, justifyContent: "center" }} >
-
-                                    <TouchableOpacity
+                                    {values.mainInfo.links.length > 1 ? ( <TouchableOpacity
                                       onPress={() => arrayAdder.remove(index)}
                                       style={{
                                         backgroundColor: "red",
@@ -384,7 +396,8 @@ const ResumeCreateScreen = (props: Props) => {
                                       }} >
                                       <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Remove</Text>
 
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> ) : "" }
+                                    
                                     <TouchableOpacity
                                       onPress={() => arrayAdder.push({ name: "", url: "" })}
                                       style={{
@@ -419,10 +432,10 @@ const ResumeCreateScreen = (props: Props) => {
                             <View>
                               {values.Skills.skills.map((skill: any, index: number) => (
 
-                                <View>
+                                <View key={index} >
 
-                                  <Text style={{ fontSize: 23, fontWeight: "700", color: "black" }} >Skills</Text>
                                   <View style={styles.inputContainer}  >
+                                  <Text style={{ fontSize: 23, fontWeight: "700", color: "black" }} >Skills</Text>
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Skill Name</Text>
                                     <TextInput
                                       style={styles.input}
@@ -450,7 +463,7 @@ const ResumeCreateScreen = (props: Props) => {
                                   </View>
                                   <View style={{ flex: 1, justifyContent: "center" }} >
 
-                                    <TouchableOpacity
+                                  {values.Skills.skills.length > 1 ? (<TouchableOpacity
                                       onPress={() => arrayAdder.remove(index)}
                                       style={{
                                         backgroundColor: "red",
@@ -460,7 +473,9 @@ const ResumeCreateScreen = (props: Props) => {
                                       }} >
                                       <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Remove</Text>
 
-                                    </TouchableOpacity>
+                                    </TouchableOpacity>) : ""}
+                                    
+
                                     <TouchableOpacity
                                       onPress={() => arrayAdder.push({
                                         skillName: "",
@@ -490,10 +505,10 @@ const ResumeCreateScreen = (props: Props) => {
 
                               {values.Languages.languages.map((language: any, index: number) => (
 
-                                <View>
+                                <View key={index} >
 
-                                  <Text style={{ fontSize: 23, fontWeight: "700", color: "black" }} >Languages</Text>
                                   <View style={styles.inputContainer}  >
+                                  <Text style={{ fontSize: 23, fontWeight: "700", color: "black" }} >Languages</Text>
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Language Name</Text>
                                     <TextInput
                                       style={styles.input}
@@ -521,7 +536,7 @@ const ResumeCreateScreen = (props: Props) => {
                                   </View>
                                   <View style={{ flex: 1, justifyContent: "center" }} >
 
-                                    <TouchableOpacity
+                                    {values.Languages.languages.length >1 ? (<TouchableOpacity
                                       onPress={() => arrayAdder.remove(index)}
                                       style={{
                                         backgroundColor: "red",
@@ -531,7 +546,8 @@ const ResumeCreateScreen = (props: Props) => {
                                       }} >
                                       <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Remove</Text>
 
-                                    </TouchableOpacity>
+                                    </TouchableOpacity>) : "" }
+                                     
                                     <TouchableOpacity
                                       onPress={() => arrayAdder.push({
                                         languageName: "",
@@ -566,10 +582,10 @@ const ResumeCreateScreen = (props: Props) => {
                           name='Projects.projects'
                           render={(arrayAdder) => (
 
-                            <View>
+                            <View >
                               {values.Projects.projects.map((projects: any, index: number) => (
 
-                                <View>
+                                <View key={index} >
 
                                   <View style={styles.inputContainer}  >
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Project Name</Text>
@@ -601,17 +617,16 @@ const ResumeCreateScreen = (props: Props) => {
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Project Description</Text>
                                     <TextInput
                                       style={styles.input}
-                                      placeholder={`values.Projects.projects[${index}].projectDescription`}
+                                      placeholder="Tell us about your project"
                                       autoCapitalize='none'
-                                      value={values.projectdescription}
+                                      value={values.Projects.projects[`${index}`].projectDescription}
                                       onChangeText={handleChange(`Projects.projects[${index}].projectDescription`)}
 
                                     />
                                     {(errors.projectdescription) && <Text style={styles.error} >{errors.projectdescription}</Text>}
                                   </View>
                                   <View style={{ flex: 1, justifyContent: "center" }} >
-
-                                    <TouchableOpacity
+                                  {values.Projects.projects.length > 1 ? (<TouchableOpacity
                                       onPress={() => arrayAdder.remove(index)}
                                       style={{
                                         backgroundColor: "red",
@@ -621,7 +636,8 @@ const ResumeCreateScreen = (props: Props) => {
                                       }} >
                                       <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Remove</Text>
 
-                                    </TouchableOpacity>
+                                    </TouchableOpacity>) : ""}
+                                    
                                     <TouchableOpacity
                                       onPress={() => arrayAdder.push({
                                         projectName: "",
@@ -670,7 +686,7 @@ const ResumeCreateScreen = (props: Props) => {
                         <TouchableOpacity
                           style={styles.button}
                           activeOpacity={0.7}
-                          disabled={!isValid || isSubmitting}
+                          
                           onPress={incrementTab} >
 
                           <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Next</Text>
