@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { StackParamList } from '../types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -12,45 +12,59 @@ const ResumeDownloadScreen = (props: Props) => {
   const resumes = useAppSelector(state => state.reducer);
 
   //icon ekle
-
+  //design da sıkıntı var düzenle
   return (
-    <View style={{flex:1,backgroundColor:"red"}} >
+    <View style={{ flex: 1 }} >
 
       {resumes.map((resume, index) => (
 
-        <View key={index} >
-          <View style={{ backgroundColor: "orange", padding: 10 }} >
+        <View style={{ flex: 1 }} key={index} >
+          <View style={{ padding: 10 }} >
 
             <Text style={{ fontSize: 20, fontWeight: "700", color: "black", textAlign: "center" }} >{resume.mainInfo.name}</Text>
-            <Text style={{ fontSize: 15, fontWeight: "600", color: "black", textAlign: "center" }} >{resume.mainInfo.jobTitle}</Text>
-            <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} >{resume.mainInfo.email}</Text>
-            <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} >{resume.mainInfo.phone}</Text>
-            <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} >{resume.mainInfo.city}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "600", color: "black", textAlign: "center",padding:8 }} >{resume.mainInfo.jobTitle}</Text>
+            
+            <View style={{flexDirection:"row"}} >
+            <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >E-mail:</Text>
+            <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal:4 }} >{resume.mainInfo.email}</Text>
+            </View>
+            
+            <View style={{flexDirection:"row"}} >
+            <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >Phone:</Text>
+            <Text style={{ fontSize: 11, fontWeight: "600", color: "black" , paddingHorizontal:4}} >{resume.mainInfo.phone}</Text>
+            </View>
+            
+            <View style={{flexDirection:"row"}} >
+            <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >City</Text>
+            <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal:4 }} >{resume.mainInfo.city}</Text>
+            </View>
+            
             {resume.mainInfo.links.map((val, index) => (
               <View style={{ flexDirection: "row" }} key={index} >
 
-                <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} >{val.name + ": "}</Text>
-                <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} >{val.url}</Text>
+                <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }} >* {val.name + ": "}</Text>
+                <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} > {val.url}</Text>
               </View>
             ))}
 
           </View>
           <View style={{ padding: 10 }} >
-            <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Profile Summary</Text>
-            <Text style={{ fontSize: 11,color: "black" }} >{resume.profileInfo?.profileDescription}</Text>
+
+            <Text style={styles.titles} >Profile Summary</Text>
+            <Text style={{ fontSize: 12, color: "black" }} >{resume.profileInfo?.profileDescription}</Text>
 
           </View>
           <View style={{ padding: 10 }} >
-            <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Skills & Languages</Text>
+            <Text style={styles.titles} >Skills & Languages</Text>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 20 }} >
 
               <View  >
 
                 {resume.Skills.skills.map((val, index) => (
-                  <View style={{ paddingVertical: 5 }} key={index} >
+                  <View style={{ paddingVertical: 3 }} key={index} >
 
-                    <Text style={{color:"black",fontSize:11}} >{val.skillName}</Text>
-                    <Text style={{color:"black",fontSize:11}} >{val.skillLevel}</Text>
+                    <Text style={{ color: "black", fontSize: 11, fontWeight: "600" }} >- {val.skillName}</Text>
+                    {/* <Text style={{ color: "black", fontSize: 11 }} >{val.skillLevel}</Text> */}
                   </View>
                 ))}
               </View>
@@ -58,10 +72,10 @@ const ResumeDownloadScreen = (props: Props) => {
               <View>
 
                 {resume.Languages.languages.map((val, index) => (
-                  <View style={{ paddingVertical: 5 }} key={index} >
+                  <View style={{ paddingVertical: 3, flexDirection: "row" }} key={index} >
 
-                    <Text style={{color:"black",fontSize:11}} >{val.languageName}</Text>
-                    <Text style={{color:"black",fontSize:11}} >{val.languageLevel}</Text>
+                    <Text style={{ color: "black", fontSize: 11, fontWeight: "600" }} >{val.languageName}</Text>
+                    <Text style={{ paddingHorizontal: 3, color: "black", fontSize: 11 }} >- {val.languageLevel}</Text>
                   </View>
                 ))}
               </View>
@@ -71,55 +85,95 @@ const ResumeDownloadScreen = (props: Props) => {
 
           {/* açıklamalara başlık ekle company name gibi  */}
           <View style={{ padding: 10 }} >
-            <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Experiences</Text>
-            <Text style={{ color: "black", fontSize:11 }} >{resume.ExperienceInfo?.companyName}</Text>
-            <Text style={{ color: "black", fontSize:11 }} >{resume.ExperienceInfo?.position}</Text>
-            <Text style={{ color: "black", fontSize:11 }} >{resume.ExperienceInfo?.startDate}</Text>
-            {resume.ExperienceInfo?.endDate?.length === 0 ? <Text style={{fontSize:11}} >Currently Working Here</Text>
-            : <Text style={{ color: "black" ,fontSize:11}} >{resume.ExperienceInfo?.endDate}</Text> }
-            
-            {/* experienceyi sil, educationa study field ekle */}
-            {/* experience ve educationu yan yana al  */}
-            <Text style={{ color: "black",fontSize:11 }} >{resume.ExperienceInfo?.jobDescription}</Text>
+            <Text style={styles.titles} >Experiences</Text>
+            {resume.ExperienceInfo?.experiences?.map((val, index) => (
+              // design kayması var düzenle
+              <View style={{ paddingVertical: 3 }} key={index} >
+                <View style={{ flexDirection: "row" }} >
+                  <Text style={{ color: "#1F8A70", fontSize: 11, fontWeight: "600" }}  >Company name:</Text>
+                  <Text style={{ color: "black", fontSize: 12,paddingHorizontal:6 }} >{val.companyName}</Text>
+                </View>
+
+                <Text style={{ color: "black", fontSize: 11 }} >{val.position}</Text>
+                <View style={{ flexDirection: "row" }} >
+
+                  <Text style={{ color: "black", fontSize: 11 }} >From  {val.startDate}</Text>
+                  {val.endDate?.length === 0 ? <Text style={{ fontSize: 11 }} >  Currently Working Here</Text>
+                    : <Text style={{ paddingHorizontal: 5, color: "black", fontSize: 11 }} >To  {val.endDate}</Text>}
+                </View>
+
+                <Text style={{ color: "black", fontSize: 11 }} >{val.jobDescription}</Text>
+
+              </View>
+            ))}
+
 
           </View>
 
           <View style={{ padding: 10 }} >
-            <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Education</Text>
-            <Text style={{ color: "black",fontSize:11 }} >{resume.educationInfo?.schoolName}</Text>
-            {/* <Text style={{ color: "black" }} >{resume.educationInfo?.studyfield}</Text> */}
-            <Text style={{ color: "black" ,fontSize:11}} >resume.educationInfo?.fieldOfStudy</Text>
-            <Text style={{ color: "black" ,fontSize:11}} >{resume.educationInfo?.schoolCountry}</Text>
-            <Text style={{ color: "black" ,fontSize:11}} >{resume.educationInfo?.startDate}</Text>
-            {resume.educationInfo?.endDate?.length === 0 ? <Text style={{fontSize:11}} >Currently studying Here</Text>
-            : <Text style={{ color: "black",fontSize:11 }} >{resume.educationInfo?.endDate}</Text> }
-            
-            
+
+            <Text style={styles.titles} >Education</Text>
+
+            {resume.educationInfo?.educations?.map((val, index) => (
+              <View style={{ paddingVertical: 3 }} key={index} >
+
+                <View style={{flexDirection:"row"}} >
+                  <Text style={{ color: "#1F8A70",fontWeight:"600", fontSize: 11 }} >School Name:</Text>
+                  <Text style={{ color: "black", fontSize: 12 ,paddingHorizontal:6}} >{val.schoolName}</Text>
+                </View>
+
+                <Text style={{ color: "black", fontSize: 11 }} >{val.fieldOfStudy}</Text>
+                <Text style={{ color: "black", fontSize: 11 }} >{val.schoolCountry}</Text>
+
+                <View style={{ flexDirection: "row" }} >
+
+                  <Text style={{ color: "black", fontSize: 11 }} >From  {val.startDate}</Text>
+                  {val.endDate?.length === 0 ? <Text style={{ fontSize: 11 }} >  Currently studying Here</Text>
+                    : <Text style={{ paddingHorizontal: 5, color: "black", fontSize: 11 }} >To  {val.endDate}</Text>}
+                </View>
+
+              </View>
+            ))}
+
+
+
 
           </View>
 
-           <View style={{ padding: 10 }} >
+          {/* <View style={{ padding: 10 }} >
             <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Projects</Text>
-                  
+
             {resume.Projects.projects.map((val, index) => (
-            <View key={index} >
+              <View key={index} >
 
-              <Text style={{color:"black", fontSize:11}} >{val.projectName}</Text>
-              <Text style={{color:"black", fontSize:11}} >{val.projectLink}</Text>
-              <Text style={{color:"black", fontSize:11}} >{val.projectDescription}</Text>
-            </View>
+                <Text style={{ color: "black", fontSize: 11 }} >{val.projectName}</Text>
+                <Text style={{ color: "black", fontSize: 11 }} >{val.projectLink}</Text>
+                <Text style={{ color: "black", fontSize: 11 }} >{val.projectDescription}</Text>
+              </View>
 
-          ))}
-        
+            ))}
 
-          </View>
-        
-          
-         
+
+          </View> */}
+
+
+
         </View>
       ))}
     </View>
   )
+
 }
+
+const styles = StyleSheet.create({
+  titles: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#F2921D",
+    borderBottomWidth: 1,
+    paddingVertical: 5,
+    borderBottomColor: "#F2921D"
+  }
+})
 
 export default ResumeDownloadScreen

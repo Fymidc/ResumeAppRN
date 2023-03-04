@@ -1,28 +1,28 @@
 //formik types
-export interface FormikValueProps{
+export interface FormikValueProps {
   name: string
   jobtitle: string
   email: string
   city: string
   phone: string
-  schoolname:string
-  schoolcountry:string
-  schoolstartdate:string
-  schoolenddate:string
-  companyname:string
-  jobposition:string
-  jobstartdate:string
-  jobenddate:string
-  jobdescription:string
-  linkname:string
-  linkurl:string
-  skillname:string
-  skilllevel:string
-  languagename:string
-  languagelevel:string
-  projectname:string
-  projectlink:string
-  projectdescription:string
+  schoolname: string
+  schoolcountry: string
+  schoolstartdate: string
+  schoolenddate: string
+  companyname: string
+  jobposition: string
+  jobstartdate: string
+  jobenddate: string
+  jobdescription: string
+  linkname: string
+  linkurl: string
+  skillname: string
+  skilllevel: string
+  languagename: string
+  languagelevel: string
+  projectname: string
+  projectlink: string
+  projectdescription: string
 
 }
 
@@ -40,7 +40,7 @@ export interface Resume {
   Skills: Skills;
   Languages: Languages;
   Projects: Projects;
-  
+
 }
 
 export interface CreateInfo {
@@ -70,21 +70,21 @@ export interface ProfileInfo {
 
 export interface EducationInfo {
   sectionName: string;
-  schoolName: string;
-  degree: string;
-  fieldOfStudy: string;
-  startDate:  string;
-  endDate?:  string;
-  schoolCity: string;
-  schoolCountry: string;
+  educations : educations[]
+ 
 }
 
 export interface ExperienceInfo {
   sectionName: string;
-  companyName: string;
+  experiences:experiences[]
+ 
+}
+
+export interface experiences {
+   companyName: string;
   position: string;
-  startDate: string ;
-  endDate?:  string ;
+  startDate: string;
+  endDate?: string;
   jobDescription: string;
 }
 
@@ -94,7 +94,9 @@ export interface Date {
   year: string;
 }
 
-export interface Education {
+
+
+export interface educations {
   schoolName: string;
   degree: string;
   fieldOfStudy: string;
@@ -140,107 +142,117 @@ export interface Project {
 
 //************************** */
 export type TabStackParamList = {
-    HomeTab: undefined
-    ProfileTab:undefined
-    Settings : undefined
-   
-  };
+  HomeTab: undefined
+  ProfileTab: undefined
+  Settings: undefined
+
+};
 export type HomeStackParamList = {
-  
-    HomeS:undefined
-    ResumeCreate:{id:string|undefined}
-   
-  };
+
+  HomeS: undefined
+  ResumeCreate: { id: string | undefined }
+
+};
 export type ProfileStackParamList = {
-    ProfileS:undefined
-    Resumes:undefined
-  };
+  ProfileS: undefined
+  Resumes: undefined
+};
 export type ResumeStackParamList = {
-   
-    ThirdFragment:undefined
-    Profile:undefined
-    ProfileS:undefined
-  };
+
+  ThirdFragment: undefined
+  Profile: undefined
+  ProfileS: undefined
+};
 export type StackParamList = {
-    Home:undefined
-    Profile:undefined
-    ResumeCreate:{id:string}
-    ResumeDownload:{firstname:string}
-  };
+  Home: undefined
+  Profile: undefined
+  ResumeCreate: { id: string }
+  ResumeDownload: { firstname: string }
+};
 
-  //initial value of formik
+//initial value of formik
 
-  export const initialValue = {
-    id: "",
-    resumeName: "resume1",
-    createInfo: {
-      date: "",
-      isUpdated: false,
-    },
-    mainInfo: {
-      sectionName: "mainInfo",
-      name: "",
-      phone: "",
-      city: "",
-      jobTitle: "",
-      email: "",
-      links: [
-        {
-          name: "",
-          url: "",
-        },
-      ],
-    },
-    profileInfo: {
-      sectionName: "",
-      profileDescription: "",
-    },
-    educationInfo: {
-      sectionName: "profileInfo",
-      schoolName: "",
-      degree: "",
-      fieldOfStudy: "",
+export const initialValue = {
+  id: "",
+  resumeName: "resume1",
+  createInfo: {
+    date: "",
+    isUpdated: false,
+  },
+  mainInfo: {
+    sectionName: "mainInfo",
+    name: "",
+    phone: "",
+    city: "",
+    jobTitle: "",
+    email: "",
+    links: [
+      {
+        name: "",
+        url: "",
+      },
+    ],
+  },
+  profileInfo: {
+    sectionName: "",
+    profileDescription: "",
+  },
+  educationInfo: {
+    sectionName: "profileInfo",
+    educations: [
+      {
+        schoolName: "",
+        degree: "",
+        fieldOfStudy: "",
         startDate: "",
-      endDate: "",
-      schoolCity: "",
-      schoolCountry: "",
-    },
-    ExperienceInfo: {
-      sectionName: "experienceInfo",
-      companyName: "",
-      position: "",
-      jobTitle: "",
-      startDate: "",
-      endDate: "",
-      jobDescription: "",
-    },
-    Skills: {
-      sectionName: "Skills",
-      skills: [
-        {
-          skillName: "",
-          skillLevel: "",
-        },
-      ],
-    },
-    Languages: {
-      sectionName: "languages",
-      languages: [
-        {
-          languageName: "",
-          languageLevel: "",
-        },
-      ],
-    },
-    Projects: {
-      sectionName: "projects",
-      projects: [
-        {
-          projectName: "",
-          projectDescription: "",
-          projectLink: "",
-        },
-      ],
-    }
+        endDate: "",
+        schoolCity: "",
+        schoolCountry: ""
+      }
+    ]
 
-  };
+  },
+  ExperienceInfo: {
+    sectionName: "experienceInfo",
+    experiences: [
+
+      {
+        companyName: "",
+        position: "",
+        jobTitle: "",
+        startDate: "",
+        endDate: "",
+        jobDescription: ""
+      }
+    ],
+  },
+  Skills: {
+    sectionName: "Skills",
+    skills: [
+      {
+        skillName: "",
+        skillLevel: "",
+      },
+    ],
+  },
+  Languages: {
+    sectionName: "languages",
+    languages: [
+      {
+        languageName: "",
+        languageLevel: "",
+      },
+    ],
+  },
+  Projects: {
+    sectionName: "projects",
+    projects: [
+      {
+        projectName: "",
+        projectDescription: "",
+        projectLink: "",
+      },
+    ],
+  }
+
+};
