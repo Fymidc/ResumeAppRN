@@ -1,4 +1,11 @@
 //formik types
+
+export interface Auth {
+  email:string
+  password:string
+}
+
+
 export interface FormikValueProps {
   name: string
   jobtitle: string
@@ -168,6 +175,13 @@ export type StackParamList = {
   Profile: undefined
   ResumeCreate: { id: string }
   ResumeDownload: { firstname: string }
+};
+
+export type AuthStackParamList = {
+
+  Login: undefined
+  Register: undefined
+
 };
 
 //initial value of formik

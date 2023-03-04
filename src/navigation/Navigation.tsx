@@ -8,8 +8,10 @@ import HomeScreen from '../screens/HomeScreen'
 import ResumeScreen from '../screens/userscreen/ResumeScreen'
 import UserScreen from '../screens/userscreen/UserScreen'
 import ResumeCreateScreen from '../screens/resumeTemplateScreens/ResumeCreateScreen'
-import { HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackParamList, TabStackParamList } from '../types'
+import { AuthStackParamList, HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackParamList, TabStackParamList } from '../types'
 import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
+import LoginScreen from '../screens/auth/LoginScreen'
+import SignupScreen from '../screens/auth/SignupScreen'
 
 
 
@@ -18,6 +20,7 @@ const HomeScreenStack = createNativeStackNavigator<HomeStackParamList>()
 const ProfileScreenStack = createNativeStackNavigator<ProfileStackParamList>()
 const ResumeScreenStack = createNativeStackNavigator<ResumeStackParamList>()
 const Stack = createNativeStackNavigator<StackParamList>()
+const Auth = createNativeStackNavigator<AuthStackParamList>()
 
 
 function HomeStack() {
@@ -64,40 +67,7 @@ function ProfileStack() {
     </ProfileScreenStack.Navigator>
   )
 }
-// //deleted after fix
-// function ResumeStack() {
 
-//   return (
-//     <ResumeScreenStack.Navigator
-//         screenOptions={{ headerShown: false }}
-//         initialRouteName="FirstFragment"
-
-//       // tabBar={props => <StackBar {...props} />}
-//       >
-//         <ResumeScreenStack.Screen name="FirstFragment" component={FirstFragment} />
-//         <ResumeScreenStack.Screen 
-//         options={() => {
-//           return {
-
-//             animation: "slide_from_right",
-//             headerShown: false
-//           }
-//         }}
-//          name="SecondFragment" component={SecondFragment}  />
-//         <ResumeScreenStack.Screen 
-//         options={() => {
-//           return {
-
-//             animation: "slide_from_right",
-//             headerShown: false
-//           }
-//         }}
-//          name="ThirdFragment" component={ThirdFragment}  />
-
-
-//       </ResumeScreenStack.Navigator>
-//   )
-// }
 
 function TabStack() {
 
@@ -121,6 +91,32 @@ function TabStack() {
   )
 }
 
+function AuthStack() {
+
+  return (
+    <Auth.Navigator>
+      <Auth.Screen
+        name="Login"
+        component={LoginScreen}
+        options={() => {
+          return {
+            headerShown: false
+          }
+        }}
+      />
+      <Auth.Screen
+        name="Register"
+        component={SignupScreen}
+        options={() => {
+          return {
+            headerShown: false
+          }
+        }}
+      />
+
+    </Auth.Navigator>
+  )
+}
 
 
 const Navigation = () => {
