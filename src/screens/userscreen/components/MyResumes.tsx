@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import EmptyResume from "../../../images/emptyimage.svg"
+import EmptyResume from "../../../images/resume.svg"
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {StackParamList } from '../../../types';
@@ -23,6 +23,8 @@ const MyResumes = (props:Props) => {
       <EmptyResume
        width="100%"
        height="100%"
+     
+
       onPress={()=>navigation.navigate("ResumeCreate",{id:props.id})}
         />
     </View>

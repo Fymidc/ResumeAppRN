@@ -60,12 +60,13 @@ export default App;
 //try fragments slide animation **
 //complete resumecreatescreen and design**
 
-//fix the date start date and end date if there is no end date put there
-  // currently working here button or something
-  //develop dowload screen
+//fix the date start date and end date if there is no end date put there**
+  // currently working here button or something**
+  //develop dowload screen**
+  //create login screen and signup with formi and yup**
+  // add firebase email auth**
+  
   //add view shot library to the app and try it 
-  //create login screen and signup with formi and yup
-  // add firebase email auth
   // add real time data base and save resumes to database with user id 
   // the get the data from firabase and show them in profile screen
   //add firebase ad mob

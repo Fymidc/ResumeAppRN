@@ -171,6 +171,7 @@ export type ResumeStackParamList = {
   ProfileS: undefined
 };
 export type StackParamList = {
+  Auth: undefined
   Home: undefined
   Profile: undefined
   ResumeCreate: { id: string }

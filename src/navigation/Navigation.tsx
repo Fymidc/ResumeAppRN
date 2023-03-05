@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,7 +13,7 @@ import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
 import LoginScreen from '../screens/auth/LoginScreen'
 import SignupScreen from '../screens/auth/SignupScreen'
 
-
+import auth from "@react-native-firebase/auth"
 
 const Tab = createBottomTabNavigator<TabStackParamList>()
 const HomeScreenStack = createNativeStackNavigator<HomeStackParamList>()
@@ -81,7 +81,7 @@ function TabStack() {
     // tabBar={props => <TabBar {...props} />}
     >
       <Tab.Screen name="HomeTab" component={HomeStack} />
-      <Tab.Screen  name="ProfileTab" component={ProfileStack} />
+      <Tab.Screen name="ProfileTab" component={ProfileStack} />
 
 
       <Tab.Screen name="Settings" component={Placeholder} />
@@ -109,6 +109,7 @@ function AuthStack() {
         component={SignupScreen}
         options={() => {
           return {
+            animation:"slide_from_bottom",
             headerShown: false
           }
         }}
@@ -121,18 +122,34 @@ function AuthStack() {
 
 const Navigation = () => {
 
+  const [signedin, setsignedin] = useState(false)
+  
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      if (user) {
 
+        setsignedin(true)
+      } else {
+        setsignedin(false)
+      }
+    })
+  }, [])
 
 
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="Home"
+        initialRouteName="Auth"
 
       // tabBar={props => <StackBar {...props} />}
       >
-        <Stack.Screen name="Home" component={TabStack} />
+        {signedin ? <Stack.Screen name="Home" component={TabStack} />
+          :
+          <Stack.Screen name="Auth" component={AuthStack} />
+        }
+
+
         <Stack.Screen name="Profile" component={TabStack} />
         <Stack.Screen name="ResumeCreate"
           component={ResumeCreateScreen}

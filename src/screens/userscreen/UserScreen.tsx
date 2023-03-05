@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 import MyResumes from './components/MyResumes'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ProfileStackParamList, Resume } from '../../types'
-import EmptyResume from "../../images/emptyimage.svg"
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import {  deleteResume, selectAllResumes } from '../../store/reducer/slices/ResumeSlice'
 
@@ -39,7 +38,7 @@ const UserScreen = ({ route }: Props) => {
 
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 ,backgroundColor:"white"}}>
 
             <Header />
 
