@@ -5,37 +5,35 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAppSelector } from '../store/store'
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import ViewShot,{captureRef} from "react-native-view-shot";
+import { CameraRoll } from '@react-native-camera-roll/camera-roll'
+//import CameraRoll from '@react-native-community/cameraroll';
 
-type Props = NativeStackScreenProps<StackParamList, 'ResumeDownload'>
+//type Props = NativeStackScreenProps<StackParamList, 'ResumeDownload'>
 
 
-const ResumeDownloadScreen = (props: Props) => {
+const ResumeDownloadScreen = () => {
  
-  const viewRef= useRef<ViewShot>()
+  const viewRef= useRef<View>(null)
 
+  
   const captureViewShot = async () => {
     try {
-      const imageUri = await captureRef(viewRef,{
-        format:"png",
-        quality:0.7,
+      const uri = await captureRef(viewRef, {
+        format: 'jpg',
+        quality: 0.8,
+        fileName:"file-name"
       });
-
-
-      await Share.share({ title: "image", url: imageUri })
-      console.log(imageUri)
+      console.log(uri)
+      CameraRoll.save(uri,{type:"photo",album:"QR codes"})
+      await Share.share({ title: "image", url: uri })
     } catch (error) {
-      console.log(error)
+      Alert.alert('Error', 'Failed to capture image');
     }
-   
-    
-   
-
   }
 
+  //its done you can remove share
+  
  
-
-  //apk denemesi yapılacak
-  //sonra firebase bağlanacak veriler
 
   const resumes = useAppSelector(state => state.reducer);
 
@@ -45,7 +43,8 @@ const ResumeDownloadScreen = (props: Props) => {
 
       {resumes.map((resume, index) => (
 
-        <ViewShot style={{ flex: 1 }} ref={viewRef} options={{ format: "jpg" }} key={index} >
+        <View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
+         key={index} >
           <View style={{ padding: 10 }} >
 
             <Text style={{ fontSize: 20, fontWeight: "700", color: "black", textAlign: "center" }} >{resume.mainInfo.name}</Text>
@@ -185,7 +184,7 @@ const ResumeDownloadScreen = (props: Props) => {
 
 
 
-        </ViewShot>
+        </View>
       ))}
 
       <View style={{ position: "absolute", bottom: 50, right: 50 }} >
