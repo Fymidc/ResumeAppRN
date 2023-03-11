@@ -1,0 +1,84 @@
+ {
+    "id": "",
+    "resumeName": "resume1",
+    "createInfo": {
+      "date": "",
+      "isUpdated": false
+    },
+    "mainInfo": {
+      "sectionName": "mainInfo",
+      "name": "",
+      "phone": "",
+      "city": "",
+      "jobTitle": "",
+      "email": "",
+      "links": [
+        {
+          "name": "",
+          "url": ""
+        }
+      ]
+    },
+    "profileInfo": {
+      "sectionName": "",
+      "profileDescription": ""
+    },
+    "educationInfo": {
+      "sectionName": "profileInfo",
+      "educations": [
+        {
+          "schoolName": "",
+          "degree": "",
+          "fieldOfStudy": "",
+          "startDate": "",
+          "endDate": "",
+          "schoolCity": "",
+          "schoolCountry": ""
+        }
+      ]
+  
+    },
+    "ExperienceInfo": {
+      "sectionName": "experienceInfo",
+      "experiences": [
+  
+        {
+          "companyName": "",
+          "position": "",
+          "jobTitle": "",
+          "startDate": "",
+          "endDate": "",
+          "jobDescription": ""
+        }
+      ]
+    },
+    "Skills": {
+      "sectionName": "Skills",
+      "skills": [
+        {
+          "skillName": "",
+          "skillLevel": ""
+        }
+      ]
+    },
+    "Languages": {
+      "sectionName": "languages",
+      "languages": [
+        {
+          "languageName": "",
+          "languageLevel": ""
+        }
+      ]
+    },
+    "Projects": {
+      "sectionName": "projects",
+      "projects": [
+        {
+          "projectName": "",
+          "projectDescription": "",
+          "projectLink": ""
+        }
+      ]
+    }
+
+  }

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Share ,Alert} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity ,Alert, Platform, PermissionsAndroid} from 'react-native'
 import React, { useRef ,RefObject} from 'react'
 import { StackParamList } from '../types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -15,9 +15,25 @@ const ResumeDownloadScreen = () => {
  
   const viewRef= useRef<View>(null)
 
+  async function hasAndroidPermission() {
+    const permission = Platform.Version >= 33 ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
+  
+    const hasPermission = await PermissionsAndroid.check(permission);
+    if (hasPermission) {
+      return true;
+    }
+  
+    const status = await PermissionsAndroid.request(permission);
+    return status === 'granted';
+  }
   
   const captureViewShot = async () => {
+   // console.log((await hasAndroidPermission()))
+     if (Platform.OS === "android" && !(await hasAndroidPermission())) {
+        return;
+      }
     try {
+     
       const uri = await captureRef(viewRef, {
         format: 'jpg',
         quality: 0.8,
@@ -25,7 +41,8 @@ const ResumeDownloadScreen = () => {
       });
       console.log(uri)
       CameraRoll.save(uri,{type:"photo",album:"QR codes"})
-      await Share.share({ title: "image", url: uri })
+      Alert.alert('Success', 'Resume Downloaded.');
+     
     } catch (error) {
       Alert.alert('Error', 'Failed to capture image');
     }
