@@ -1,5 +1,7 @@
 //formik types
 
+import { nanoid } from "@reduxjs/toolkit"
+
 export interface Auth {
   email:string
   password:string
@@ -37,6 +39,8 @@ export interface FormikValueProps {
 //resume
 
 export interface Resume {
+ 
+  
   id: string;
   resumeName: string;
   createInfo: CreateInfo;
@@ -188,10 +192,11 @@ export type AuthStackParamList = {
 //initial value of formik
 
 export const initialValue = {
-  id: "",
+  id: nanoid(),
   resumeName: "resume1",
+ 
   createInfo: {
-    date: "",
+    date: new Date().toISOString(),
     isUpdated: false,
   },
   mainInfo: {

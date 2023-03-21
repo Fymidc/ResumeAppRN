@@ -9,7 +9,7 @@ import { FieldArray, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup'
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { addResume, selectAllResumes, updateResume } from '../../store/reducer/slices/ResumeSlice';
+import {  UpdateResume } from '../../store/reducer/slices/ResumeSlice';
 
 
 //route. paramdaki veri  paramlist te verildiği için bu şekilde ulaştık
@@ -27,17 +27,20 @@ const ResumeCreateScreen = (props: Props) => {
 
   const dispatch = useAppDispatch();
   const resumes = useAppSelector(state => state.reducer);
-
-  const selectedResumeArr = resumes.filter(
-    (resume: Resume) => resume.id === props.route.params.id
+//state kırmızı düzelt
+//console.log("resumess",resumes[1])
+console.log("prop id ", props.route.params.id)
+  const selectedResumeArr = resumes.resumes?.filter(
+    (resume: Resume) => resume.id === props?.route.params?.id
   );
 
-  // console.log("create screen",resumes)
-  // console.log("selected resume",selectedResumeArr[0])
-  // console.log("props dan gelen",props.route.params.id)
+  console.log("selected resumea arr",selectedResumeArr[0])
+
 
   const submitResume = (data: Resume) => {
-    dispatch(updateResume(data))
+    console.log("submit resume den gelen", data)
+    console.log("submit resume den gelen data id", data.educationInfo?.sectionName)
+    dispatch(UpdateResume(data))
     navigation.navigate("ResumeDownload", { firstname: data.mainInfo.name })
 
     console.log("submitten gelen", data.mainInfo.name)
@@ -127,18 +130,18 @@ const ResumeCreateScreen = (props: Props) => {
 
                 initialValues={selectedResumeArr[0]}
                 onSubmit={submitResume}
-                validationSchema={
-                  Yup.object().shape({
-                    mainInfo: Yup.object().shape({
+                // validationSchema={
+                //   Yup.object().shape({
+                //     mainInfo: Yup.object().shape({
 
-                      name: Yup.string().required("Please enter your name"),
-                      jobtitle: Yup.string(),
-                      email: Yup.string(),
-                      city: Yup.string(),
-                      phone: Yup.string()
-                    })
-                  })
-                }
+                //       name: Yup.string().required("Please enter your name"),
+                //       jobtitle: Yup.string(),
+                //       email: Yup.string(),
+                //       city: Yup.string(),
+                //       phone: Yup.string()
+                //     })
+                //   })
+                // }
               >
                 {({ values, handleSubmit, errors, handleChange, isValid, isSubmitting }: any) => (
                   <View style={{ flex: 1 }} >
@@ -808,7 +811,7 @@ const ResumeCreateScreen = (props: Props) => {
                         <TouchableOpacity
                           style={styles.button}
                           activeOpacity={0.7}
-                          disabled={!isValid || isSubmitting}
+                          //disabled={ isSubmitting}
                           onPress={handleSubmit} >
 
                           <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Preview</Text>

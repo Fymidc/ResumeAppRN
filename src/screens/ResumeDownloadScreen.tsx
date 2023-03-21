@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity ,Alert, Platform, PermissionsAndroid} from 'react-native'
 import React, { useRef ,RefObject} from 'react'
-import { StackParamList } from '../types'
+import { Resume, StackParamList } from '../types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAppSelector } from '../store/store'
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
@@ -58,7 +58,7 @@ const ResumeDownloadScreen = () => {
 
     <View style={{ flex: 1 }} >
 
-      {resumes.map((resume, index) => (
+      {resumes.resumes?.map((resume: Resume , index:number) => (
 
         <View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
          key={index} >
@@ -82,7 +82,7 @@ const ResumeDownloadScreen = () => {
               <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo.city}</Text>
             </View>
 
-            {resume.mainInfo.links.map((val, index) => (
+            {resume.mainInfo.links.map((val:any, index:number) => (
               <View style={{ flexDirection: "row" }} key={index} >
 
                 <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }} >* {val.name + ": "}</Text>
@@ -103,7 +103,7 @@ const ResumeDownloadScreen = () => {
 
               <View  >
 
-                {resume.Skills.skills.map((val, index) => (
+                {resume.Skills.skills.map((val:any, index:number) => (
                   <View style={{ paddingVertical: 3 }} key={index} >
 
                     <Text style={{ color: "black", fontSize: 11, fontWeight: "600" }} >- {val.skillName}</Text>
@@ -114,7 +114,7 @@ const ResumeDownloadScreen = () => {
 
               <View>
 
-                {resume.Languages.languages.map((val, index) => (
+                {resume.Languages.languages.map((val:any, index:number) => (
                   <View style={{ paddingVertical: 3, flexDirection: "row" }} key={index} >
 
                     <Text style={{ color: "black", fontSize: 11, fontWeight: "600" }} >{val.languageName}</Text>
@@ -129,7 +129,7 @@ const ResumeDownloadScreen = () => {
           {/* açıklamalara başlık ekle company name gibi  */}
           <View style={{ padding: 10 }} >
             <Text style={styles.titles} >Experiences</Text>
-            {resume.ExperienceInfo?.experiences?.map((val, index) => (
+            {resume.ExperienceInfo?.experiences?.map((val:any, index:number) => (
               // design kayması var düzenle
               <View style={{ paddingVertical: 3 }} key={index} >
                 <View style={{ flexDirection: "row" }} >
@@ -157,7 +157,7 @@ const ResumeDownloadScreen = () => {
 
             <Text style={styles.titles} >Education</Text>
 
-            {resume.educationInfo?.educations?.map((val, index) => (
+            {resume.educationInfo?.educations?.map((val:any, index:number) => (
               <View style={{ paddingVertical: 3 }} key={index} >
 
                 <View style={{ flexDirection: "row" }} >

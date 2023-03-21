@@ -17,7 +17,7 @@ type Props ={
 
 const MyResumes = (props:Props) => {
   const navigation = useNavigation<UserScreenNavigationProp>();
-
+console.log("myresumesden gelen id",props.id)
   return (
     <View style={{overflow:"hidden",borderRadius:25, aspectRatio: 1,width:"45%",height:"52%", marginHorizontal: 5, marginVertical: 15 }} >
       <EmptyResume

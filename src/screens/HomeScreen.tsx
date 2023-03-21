@@ -4,10 +4,9 @@ import Header from '../components/Header'
 import MainScreen from "../images/mainscreen.svg"
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList, initialValue, Resume } from '../types';
-import { useNavigation } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { addResume, selectAllResumes } from '../store/reducer/slices/ResumeSlice';
-import database from '@react-native-firebase/database';
+import { createResume, GetResume } from '../store/reducer/slices/ResumeSlice';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -17,25 +16,27 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 const HomeScreen = () => {
   const [resumeCreted, setresumeCreted] = useState(false)
   const dispatch = useAppDispatch();
+  
   const resumes = useAppSelector(state => state.reducer);
+//state kırmızı düzelt
+
   const navigation = useNavigation<HomeScreenNavigationProp>()
 
-  console.log(resumes)
+  //console.log("resume",resumes)
   let lastCreatedResume: Resume | undefined;
 
   const createScreen = () => {
-    database()
-    .ref('mainInfo')
-    .update({
-      city: 'Ada Lovelace',
-    })
-    .then(() => console.log('Data set.'));
-    // setresumeCreted(true)
-    // dispatch(addResume(initialValue))
+   
+    setresumeCreted(true)
+    console.log("create called")
+    dispatch(createResume(initialValue))
   }
-//firebase databasede resume kaydet initial value ile birlikte
+
+ // const isfocused = useIsFocused()
+
   useEffect(() => {
-    lastCreatedResume = resumes.slice(-1)[0];
+    dispatch(GetResume())
+    lastCreatedResume = resumes?.resumes.slice(-1)[0];
     console.log("lastcreated", lastCreatedResume)
     if (resumeCreted) {
       setTimeout(() => {
@@ -43,8 +44,9 @@ const HomeScreen = () => {
       }, 500);
     }
   }, [resumeCreted])
-
-
+  //last created kısmıında id hemen create screene geçmiyor
+//hatayı düzelt resumes den gelen get isteğini düzenle
+console.log("home resumes", resumes)
   return (
     <View style={{ flex: 1, backgroundColor: "white" }} >
       <Header />
