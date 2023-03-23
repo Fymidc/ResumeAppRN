@@ -3,18 +3,119 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import MainScreen from "../images/mainscreen.svg"
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList, initialValue, Resume } from '../types';
+import { HomeStackParamList, Resume } from '../types';
 import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { createResume, GetResume } from '../store/reducer/slices/ResumeSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { nanoid } from "@reduxjs/toolkit"
+
+
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
   'HomeS'
 >;
 
+
+
+
+
 const HomeScreen = () => {
+  const [userid, setuserid] = useState("")
+
+//initial values 
+ const initialValue = {
+  id: nanoid(),
+  userid:userid,
+  resumeName: "resume1",
+ 
+  createInfo: {
+    date: new Date().toISOString(),
+    isUpdated: false,
+  },
+  mainInfo: {
+    sectionName: "mainInfo",
+    name: "",
+    phone: "",
+    city: "",
+    jobTitle: "",
+    email: "",
+    links: [
+      {
+        name: "",
+        url: "",
+      },
+    ],
+  },
+  profileInfo: {
+    sectionName: "",
+    profileDescription: "",
+  },
+  educationInfo: {
+    sectionName: "profileInfo",
+    educations: [
+      {
+        schoolName: "",
+        degree: "",
+        fieldOfStudy: "",
+        startDate: "",
+        endDate: "",
+        schoolCity: "",
+        schoolCountry: ""
+      }
+    ]
+
+  },
+  ExperienceInfo: {
+    sectionName: "experienceInfo",
+    experiences: [
+
+      {
+        companyName: "",
+        position: "",
+        jobTitle: "",
+        startDate: "",
+        endDate: "",
+        jobDescription: ""
+      }
+    ],
+  },
+  Skills: {
+    sectionName: "Skills",
+    skills: [
+      {
+        skillName: "",
+        skillLevel: "",
+      },
+    ],
+  },
+  Languages: {
+    sectionName: "languages",
+    languages: [
+      {
+        languageName: "",
+        languageLevel: "",
+      },
+    ],
+  },
+  Projects: {
+    sectionName: "projects",
+    projects: [
+      {
+        projectName: "",
+        projectDescription: "",
+        projectLink: "",
+      },
+    ],
+  }
+
+};
+
+
+
   const [resumeCreted, setresumeCreted] = useState(false)
+ 
   const dispatch = useAppDispatch();
   
   const resumes = useAppSelector(state => state.reducer);
@@ -31,11 +132,25 @@ const HomeScreen = () => {
     console.log("create called")
     dispatch(createResume(initialValue))
   }
+  const getData = async () => {
+    try {
+      const key = await AsyncStorage.getItem('key')
+      if(key !== null) {
+        setuserid(key)
+        // value previously stored
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  
 
- // const isfocused = useIsFocused()
+
+  // const isfocused = useIsFocused()
 
   useEffect(() => {
     dispatch(GetResume())
+    getData()
     lastCreatedResume = resumes?.resumes.slice(-1)[0];
     console.log("lastcreated", lastCreatedResume)
     if (resumeCreted) {

@@ -12,6 +12,7 @@ import { AuthStackParamList, HomeStackParamList, ProfileStackParamList, ResumeSt
 import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
 import LoginScreen from '../screens/auth/LoginScreen'
 import SignupScreen from '../screens/auth/SignupScreen'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import auth from "@react-native-firebase/auth"
 
@@ -127,7 +128,7 @@ const Navigation = () => {
   useEffect(() => {
     auth().onAuthStateChanged(user => {
       if (user) {
-
+        AsyncStorage.setItem('key', user.uid)
         setsignedin(true)
       } else {
         setsignedin(false)

@@ -100,7 +100,7 @@ const resumeActionSlice = createSlice({
         return {
           ...state,
           loading:false,
-          state: action.payload
+          resumes: action.payload
         }
       })
   },
@@ -145,8 +145,8 @@ export const GetResume = createAsyncThunk('resume/GetResume', async () => {
     .collection("resumes").get()
 
   snapshot.forEach((doc) => {
-    // console.log(doc.data())
-    resumearray.push(doc.data())
+     //console.log(doc.data().data)
+    resumearray.push(doc.data().data)
 
   })
 

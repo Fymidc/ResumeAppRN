@@ -1,6 +1,9 @@
 //formik types
 
 import { nanoid } from "@reduxjs/toolkit"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const userkey = AsyncStorage.getItem('key')
 
 export interface Auth {
   email:string
@@ -42,6 +45,7 @@ export interface Resume {
  
   
   id: string;
+  userid:any
   resumeName: string;
   createInfo: CreateInfo;
   mainInfo: MainInfo;
@@ -193,6 +197,7 @@ export type AuthStackParamList = {
 
 export const initialValue = {
   id: nanoid(),
+  userid:userkey,
   resumeName: "resume1",
  
   createInfo: {
