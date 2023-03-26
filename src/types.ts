@@ -1,9 +1,6 @@
 //formik types
 
-import { nanoid } from "@reduxjs/toolkit"
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const userkey = AsyncStorage.getItem('key')
 
 export interface Auth {
   email:string
@@ -170,7 +167,7 @@ export type HomeStackParamList = {
 };
 export type ProfileStackParamList = {
   ProfileS: undefined
-  Resumes: undefined
+  Logins: undefined
 };
 export type ResumeStackParamList = {
 
@@ -195,89 +192,4 @@ export type AuthStackParamList = {
 
 //initial value of formik
 
-export const initialValue = {
-  id: nanoid(),
-  userid:userkey,
-  resumeName: "resume1",
- 
-  createInfo: {
-    date: new Date().toISOString(),
-    isUpdated: false,
-  },
-  mainInfo: {
-    sectionName: "mainInfo",
-    name: "",
-    phone: "",
-    city: "",
-    jobTitle: "",
-    email: "",
-    links: [
-      {
-        name: "",
-        url: "",
-      },
-    ],
-  },
-  profileInfo: {
-    sectionName: "",
-    profileDescription: "",
-  },
-  educationInfo: {
-    sectionName: "profileInfo",
-    educations: [
-      {
-        schoolName: "",
-        degree: "",
-        fieldOfStudy: "",
-        startDate: "",
-        endDate: "",
-        schoolCity: "",
-        schoolCountry: ""
-      }
-    ]
 
-  },
-  ExperienceInfo: {
-    sectionName: "experienceInfo",
-    experiences: [
-
-      {
-        companyName: "",
-        position: "",
-        jobTitle: "",
-        startDate: "",
-        endDate: "",
-        jobDescription: ""
-      }
-    ],
-  },
-  Skills: {
-    sectionName: "Skills",
-    skills: [
-      {
-        skillName: "",
-        skillLevel: "",
-      },
-    ],
-  },
-  Languages: {
-    sectionName: "languages",
-    languages: [
-      {
-        languageName: "",
-        languageLevel: "",
-      },
-    ],
-  },
-  Projects: {
-    sectionName: "projects",
-    projects: [
-      {
-        projectName: "",
-        projectDescription: "",
-        projectLink: "",
-      },
-    ],
-  }
-
-};

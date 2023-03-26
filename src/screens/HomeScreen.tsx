@@ -9,7 +9,18 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { createResume, GetResume } from '../store/reducer/slices/ResumeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { nanoid } from "@reduxjs/toolkit"
+import { AppOpenAd, InterstitialAd, RewardedAd, BannerAd, TestIds, AdEventType, BannerAdSize } from 'react-native-google-mobile-ads';
 
+
+
+
+AppOpenAd.createForAdRequest(TestIds.APP_OPEN);
+
+InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL);
+
+RewardedAd.createForAdRequest(TestIds.REWARDED);
+
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-2976719493824952/6075967883';
 
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -137,6 +148,7 @@ const HomeScreen = () => {
       const key = await AsyncStorage.getItem('key')
       if(key !== null) {
         setuserid(key)
+        console.log("home dan gelen user id",key)
         // value previously stored
       }
     } catch(e) {
@@ -166,7 +178,7 @@ console.log("home resumes", resumes)
     <View style={{ flex: 1, backgroundColor: "white" }} >
       <Header />
 
-      <View style={{ flex: 1, marginVertical: 10, alignItems: "center" }} >
+      <View style={{ flex: 1, alignItems: "center" }} >
         <Text style={{ fontSize: 30, paddingHorizontal: 20, fontWeight: "700", color: "black", textAlign: "center" }} >Build your cv for new adventures</Text>
         <View style={{
 
@@ -195,6 +207,13 @@ console.log("home resumes", resumes)
           </TouchableOpacity>
         </View>
       </View>
+      <BannerAd
+                unitId={adUnitId}
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
     </View>
   )
 }

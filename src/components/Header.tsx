@@ -16,14 +16,7 @@ const Header = () => {
                 <Text style={{ fontSize: 25,color:"black",fontWeight:"700" }} >CV Builder</Text>
                 
             </View>
-            <View style={{ justifyContent: "center" ,
-            backgroundColor:"orange",
-            borderRadius:100,
-            width:30,height:30,
-            
-            }} >
-                <Text style={{textAlign:"center",fontSize:20,fontWeight:"600"}} >F</Text>
-            </View>
+           
         </View>
     )
 }

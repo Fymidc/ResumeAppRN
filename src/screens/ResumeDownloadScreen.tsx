@@ -1,17 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity ,Alert, Platform, PermissionsAndroid} from 'react-native'
-import React, { useRef ,RefObject} from 'react'
+import React, { useRef ,RefObject, useEffect, useState} from 'react'
 import { Resume, StackParamList } from '../types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAppSelector } from '../store/store'
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import ViewShot,{captureRef} from "react-native-view-shot";
 import { CameraRoll } from '@react-native-camera-roll/camera-roll'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //import CameraRoll from '@react-native-community/cameraroll';
 
 //type Props = NativeStackScreenProps<StackParamList, 'ResumeDownload'>
 
 
 const ResumeDownloadScreen = () => {
+  const [userid, setuserid] = useState("")
+
  
   const viewRef= useRef<View>(null)
 
@@ -48,7 +52,23 @@ const ResumeDownloadScreen = () => {
     }
   }
 
-  //its done you can remove share
+  const getData = async () => {
+    try {
+      const key = await AsyncStorage.getItem('key')
+      if(key !== null) {
+        setuserid(key)
+        console.log("home dan gelen user id",key)
+        // value previously stored
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+  
   
  
 
@@ -59,8 +79,7 @@ const ResumeDownloadScreen = () => {
     <View style={{ flex: 1 }} >
 
       {resumes.resumes?.map((resume: Resume , index:number) => (
-
-        <View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
+        (resume.userid === userid ?<View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
          key={index} >
           <View style={{ padding: 10 }} >
 
@@ -201,7 +220,8 @@ const ResumeDownloadScreen = () => {
 
 
 
-        </View>
+        </View> : "" )
+        
       ))}
 
       <View style={{ position: "absolute", bottom: 50, right: 50 }} >

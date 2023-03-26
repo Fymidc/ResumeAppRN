@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 import firestore from '@react-native-firebase/firestore';
-import { initialValue, Resume } from "../../../types";
+import { Resume } from "../../../types";
 
 interface ResumesState {
   resumes: Resume[];
@@ -111,7 +111,7 @@ const resumeActionSlice = createSlice({
 export const createResume = createAsyncThunk('resume/createResume', async (data: Resume) => {
   console.log("createreducer called")
 
-  firestore()
+  await firestore()
     .collection("resumes")
     .doc(data.id)
     .set({

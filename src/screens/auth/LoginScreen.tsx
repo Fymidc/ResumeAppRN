@@ -24,11 +24,15 @@ const LoginScreen = () => {
     try {
       auth().signInWithEmailAndPassword(values.email, values.password).then(() => {
         resetForm({})
+       
 
       })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             alert("That email address is already in use!")
+          }
+          if (error.code === 'auth/internal-error') {
+            alert("Unexpected error happend!")
           }
           if (error.code === 'auth/weak-password') {
             alert("password is too short.")
@@ -48,7 +52,7 @@ const LoginScreen = () => {
 
       setsubmitting(false)
     }
-
+    
   }
   return (
     <View style={style.container} >

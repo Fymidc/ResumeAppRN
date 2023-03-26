@@ -66,13 +66,15 @@ export default App;
   //create login screen and signup with formi and yup**
   // add firebase email auth**
   
-  //add view shot library to the app and try it 
-  // add real time data base and save resumes to database with user id 
-  // the get the data from firabase and show them in profile screen
+  //add view shot library to the app and try it **
+  // add real time data base and save resumes to database with user id **
+  // the get the data from firabase and show them in profile screen**
+  //add bottomslidebar for setting and add - contact us,rate us- logout- **
+  //fix the ui of the tab bar **
+  //add animation to the proggress bar and the tab bar**
   //add firebase ad mob
-  //fix the ui of the tab bar
-  //add animation to the proggress bar and the tab bar
   //add some fonts and fix some colors of the app 
+  //add splash screen and create icon and add them 
   //deploy it
 
 

@@ -1,11 +1,10 @@
-import { View, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import HomeScreen from '../screens/HomeScreen'
-import ResumeScreen from '../screens/userscreen/ResumeScreen'
 import UserScreen from '../screens/userscreen/UserScreen'
 import ResumeCreateScreen from '../screens/resumeTemplateScreens/ResumeCreateScreen'
 import { AuthStackParamList, HomeStackParamList, ProfileStackParamList, ResumeStackParamList, StackParamList, TabStackParamList } from '../types'
@@ -13,8 +12,11 @@ import ResumeDownloadScreen from '../screens/ResumeDownloadScreen'
 import LoginScreen from '../screens/auth/LoginScreen'
 import SignupScreen from '../screens/auth/SignupScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AntDesign from "react-native-vector-icons/AntDesign"
 
 import auth from "@react-native-firebase/auth"
+import RBSheet from 'react-native-raw-bottom-sheet'
+import CustomtabBar from './CustomTabBar'
 
 const Tab = createBottomTabNavigator<TabStackParamList>()
 const HomeScreenStack = createNativeStackNavigator<HomeStackParamList>()
@@ -57,14 +59,15 @@ function ProfileStack() {
         }}
       />
       <ProfileScreenStack.Screen
-        name="Resumes"
-        component={ResumeScreen}
+        name="Logins"
+        component={LoginScreen}
         options={() => {
           return {
             headerShown: false
           }
         }}
       />
+
     </ProfileScreenStack.Navigator>
   )
 }
@@ -72,20 +75,23 @@ function ProfileStack() {
 
 function TabStack() {
 
-  const Placeholder = () => { return (<View />) }
+  const Placeholder = () => {return(<View/>)}
 
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName="HomeTab"
-
+      tabBar={props => <CustomtabBar {...props} /> }
+     
     // tabBar={props => <TabBar {...props} />}
     >
       <Tab.Screen name="HomeTab" component={HomeStack} />
       <Tab.Screen name="ProfileTab" component={ProfileStack} />
 
 
-      <Tab.Screen name="Settings" component={Placeholder} />
+      <Tab.Screen name="Settings" component={Placeholder}
+       
+      />
 
 
     </Tab.Navigator>
@@ -110,7 +116,7 @@ function AuthStack() {
         component={SignupScreen}
         options={() => {
           return {
-            animation:"slide_from_bottom",
+            animation: "slide_from_bottom",
             headerShown: false
           }
         }}
@@ -124,11 +130,12 @@ function AuthStack() {
 const Navigation = () => {
 
   const [signedin, setsignedin] = useState(false)
-  
+
   useEffect(() => {
     auth().onAuthStateChanged(user => {
       if (user) {
         AsyncStorage.setItem('key', user.uid)
+        
         setsignedin(true)
       } else {
         setsignedin(false)
