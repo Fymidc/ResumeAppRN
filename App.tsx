@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -27,10 +27,22 @@ import {
 import HomeScreen from './src/screens/HomeScreen';
 import UserScreen from './src/screens/userscreen/UserScreen';
 import Navigation from './src/navigation/Navigation';
+import SplashScreen from 'react-native-splash-screen';
+import { MobileAds } from 'react-native-google-mobile-ads';
 
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+
+  
+    useEffect(() => {
+      SplashScreen.hide()
+      MobileAds()
+        .initialize()
+        .then(adapterStatuses =>{
+          
+        })
+    }, [])
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -77,4 +89,4 @@ export default App;
   //add splash screen and create icon and add them 
   //deploy it
 
-
+//fix the işşue about şplaş şcreen
