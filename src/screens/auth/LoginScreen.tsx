@@ -68,7 +68,7 @@ const LoginScreen = () => {
       </View>
       <View style={style.header} >
 
-        <Text style={{ top: -70, fontSize: 30, fontWeight: "700", color: "black" }} >Login</Text>
+        <Text style={{ top: -70, fontSize: 32,  color: "black" ,fontFamily:"arial_narrow_7"}} >Login</Text>
       </View>
       <Formik
 

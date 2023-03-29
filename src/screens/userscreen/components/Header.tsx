@@ -30,7 +30,7 @@ const Header = (props: Props) => {
             <View style={{ alignItems: "center", padding: 10}}  >
 
                 
-                <Text style={{ fontSize: 20, color: "black", fontWeight: "700" }} >{props.userName? props.userName : ""}</Text>
+                <Text style={{ fontSize: 21,letterSpacing:1, color: "black",fontFamily:"Anton-Regular" }} >PROFILE</Text>
 
                
             </View>

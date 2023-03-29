@@ -179,7 +179,7 @@ console.log("home resumes", resumes)
       <Header />
 
       <View style={{ flex: 1, alignItems: "center" }} >
-        <Text style={{ fontSize: 30, paddingHorizontal: 20, fontWeight: "700", color: "black", textAlign: "center" }} >Build your cv for new adventures</Text>
+        <Text style={{ fontSize: 30, paddingHorizontal: 20, fontFamily:"arial_narrow_7",color: "black", textAlign: "center" }} >Build your cv for new adventures</Text>
         <View style={{
 
           marginTop: 15,
@@ -187,14 +187,14 @@ console.log("home resumes", resumes)
           width: "95%",
 
         }}>
-          <MainScreen width="100%" height="100%" />
+          <MainScreen width="90%" height="90%" />
 
         </View>
 
 
 
         <View style={styles.inputContainer} >
-          <Text style={{ marginVertical: 15, fontSize: 20, fontWeight: "700", color: "black" }} >
+          <Text style={{ marginVertical: 15, fontSize: 20, fontFamily:"arial_narrow_7", color: "black" }} >
             Let's create a new CV
           </Text>
           <TouchableOpacity
@@ -221,7 +221,7 @@ console.log("home resumes", resumes)
 const styles = StyleSheet.create({
   inputContainer: {
     width: "50%",
-    marginVertical: 20,
+    
     alignItems: "center"
   },
   button: {

@@ -55,7 +55,7 @@ const SignupScreen = () => {
         <Man width="70%" height="60%" />
       </View>
       <View style={style.header} >
-        <Text style={{top: -70, fontSize: 30, fontWeight: "700", color: "black"}} >Sign up</Text>
+        <Text style={{top: -70, fontSize: 32, color: "black",fontFamily:"arial_narrow_7"}} >Sign up</Text>
       </View>
       <Formik
 

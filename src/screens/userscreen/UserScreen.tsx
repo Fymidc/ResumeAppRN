@@ -86,7 +86,7 @@ const UserScreen = ({ route, navigation }: Props) => {
       <Header navigation={navigation} userName={userName} />
 
       <View style={{flex:1, marginTop: 20 }} >
-        <Text style={{ paddingHorizontal: 20, fontSize: 20, color: "black", fontWeight: "700" }} >My CV's</Text>
+        <Text style={{ paddingHorizontal: 20, fontSize: 20, color: "black",fontFamily:"Anton-Regular", }} >My CV's</Text>
         <View style={{ padding: 10, flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }} >
           {resumes.loading === true ? <ActivityIndicator size={25} color={"green"} /> : resumes.resumes?.map((value: Resume, index: number) => (
             (value.userid === userid ? <MyResumes key={index} id={value.id} /> : "")

@@ -13,7 +13,7 @@ const Header = () => {
         }} >
             <View style={{ justifyContent: "center" }} >
 
-                <Text style={{ fontSize: 25,color:"black",fontWeight:"700" }} >CV Builder</Text>
+                <Text style={{ fontSize: 38,color:"black",fontFamily:"One two thirty-four" }} >CV Builder</Text>
                 
             </View>
            

@@ -841,10 +841,11 @@ const styles = StyleSheet.create({
   },
   paragraphStyle: {
     margin: 24,
-    fontSize: 30,
+    fontSize: 32,
     color: "black",
-    fontWeight: '800',
+    
     textAlign: 'center',
+    fontFamily:"arial_narrow_7"
   },
   buttonStyle: {
     flex: 1,
