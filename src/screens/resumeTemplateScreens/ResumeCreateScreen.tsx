@@ -27,29 +27,20 @@ const ResumeCreateScreen = (props: Props) => {
 
   const dispatch = useAppDispatch();
   const resumes = useAppSelector(state => state.reducer);
-//state kırmızı düzelt
-//console.log("resumess",resumes[1])
-console.log("prop id ", props.route.params.id)
+
   const selectedResumeArr = resumes.resumes?.filter(
     (resume: Resume) => resume.id === props?.route.params?.id
   );
 
-  console.log("selected resumea arr",selectedResumeArr[0])
 
 
   const submitResume = (data: Resume) => {
-    console.log("submit resume den gelen", data)
-    console.log("submit resume den gelen data id", data.educationInfo?.sectionName)
     dispatch(UpdateResume(data))
     navigation.navigate("ResumeDownload", { firstname: data.mainInfo.name })
 
-    console.log("submitten gelen", data.mainInfo.name)
 
   }
 
-
-  //values.name bu haliyle geldi store dispatch et ve resume
-  // view screende reduxtan veri çekerek design et
 
 
   const allTabs = [
@@ -81,8 +72,7 @@ console.log("prop id ", props.route.params.id)
 
   useEffect(() => {
     setSelectedTab(allTabs[currTab]);
-    //dispatch(selectAllResumes)
-    //progress bara animation ekle 
+  
     setProgress((prev) => (currTab + 1) * tabPercentRate);
   }, [currTab]);
 

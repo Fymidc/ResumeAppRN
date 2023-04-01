@@ -169,6 +169,8 @@ export type ProfileStackParamList = {
   ProfileS: undefined
   Logins: undefined
 };
+
+
 export type ResumeStackParamList = {
 
   ThirdFragment: undefined

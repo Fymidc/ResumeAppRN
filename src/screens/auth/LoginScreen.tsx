@@ -1,6 +1,6 @@
 
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
+import React,{useState} from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup"
 import Women from "../../images/womenphone.svg"
@@ -19,31 +19,41 @@ type AuthScreenNavigationProp = NativeStackNavigationProp<
 const LoginScreen = () => {
 
   const navigation = useNavigation<AuthScreenNavigationProp>()
+  const [loading, setloading] = useState(false)
 
   const login = (values: Auth, { setsubmitting, resetForm }: any) => {
+    setloading(true)
     try {
       auth().signInWithEmailAndPassword(values.email, values.password).then(() => {
         resetForm({})
-       
+        setloading(false)
 
       })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
-            alert("That email address is already in use!")
+            Alert.alert("That email address is already in use!")
+            setloading(false)
+            return
           }
           if (error.code === 'auth/internal-error') {
-            alert("Unexpected error happend!")
+            Alert.alert("Unexpected error happend!")
+            setloading(false)
+            return
           }
           if (error.code === 'auth/weak-password') {
-            alert("password is too short.")
+            Alert.alert("password is too short.")
+            setloading(false)
+            return
           }
           if (error.code === 'auth/user-not-found') {
-            alert("user not found.")
+            Alert.alert("user not found.")
+            setloading(false)
             setsubmitting(false)
           }
 
           if (error.code === 'auth/invalid-email') {
-            alert("That email address is invalid!")
+            Alert.alert("That email address is invalid!")
+            setloading(false)
             setsubmitting(false)
           }
 
@@ -52,7 +62,7 @@ const LoginScreen = () => {
 
       setsubmitting(false)
     }
-    
+
   }
   return (
     <View style={style.container} >
@@ -68,7 +78,7 @@ const LoginScreen = () => {
       </View>
       <View style={style.header} >
 
-        <Text style={{ top: -70, fontSize: 32,  color: "black" ,fontFamily:"arial_narrow_7"}} >Login</Text>
+        <Text style={{ top: -70, fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Login</Text>
       </View>
       <Formik
 
@@ -134,15 +144,17 @@ const LoginScreen = () => {
               <TouchableOpacity
                 style={style.button}
                 activeOpacity={0.7}
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid}
                 onPress={handleSubmit} >
-
-                <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Login</Text>
+                {loading 
+                ? <ActivityIndicator color={"white"} size={24}/>
+                : <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Login</Text>
+                }
               </TouchableOpacity>
               <View style={{ flexDirection: "row", top: 20, justifyContent: "center" }} >
 
                 <Text style={{ textAlign: "center" }} >New to Resume? </Text>
-                <TouchableOpacity activeOpacity={0.7}  onPress={()=>navigation.navigate("Register")} >
+                <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Register")} >
 
                   <Text style={{ textAlign: "center", color: "#2F58CD" }} >Register here..</Text>
                 </TouchableOpacity>
@@ -196,8 +208,3 @@ const style = StyleSheet.create({
     color: "red"
   }
 })
-
-function alert(arg0: string) {
-  throw new Error('Function not implemented.');
-}
-

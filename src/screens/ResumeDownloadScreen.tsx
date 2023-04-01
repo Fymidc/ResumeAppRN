@@ -83,25 +83,25 @@ const ResumeDownloadScreen = () => {
          key={index} >
           <View style={{ padding: 10 }} >
 
-            <Text style={{ fontSize: 20, fontWeight: "700", color: "black", textAlign: "center" }} >{resume.mainInfo.name}</Text>
-            <Text style={{ fontSize: 16, fontWeight: "600", color: "black", textAlign: "center", padding: 8 }} >{resume.mainInfo.jobTitle}</Text>
+            <Text style={{ fontSize: 20, fontWeight: "700", color: "black", textAlign: "center" }} >{resume.mainInfo?.name}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "600", color: "black", textAlign: "center", padding: 8 }} >{resume.mainInfo?.jobTitle}</Text>
 
             <View style={{ flexDirection: "row" }} >
               <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >E-mail:</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo.email}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.email}</Text>
             </View>
 
             <View style={{ flexDirection: "row" }} >
               <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >Phone:</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo.phone}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.phone}</Text>
             </View>
 
             <View style={{ flexDirection: "row" }} >
               <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >City</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo.city}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.city}</Text>
             </View>
 
-            {resume.mainInfo.links.map((val:any, index:number) => (
+            {resume.mainInfo?.links.map((val:any, index:number) => (
               <View style={{ flexDirection: "row" }} key={index} >
 
                 <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }} >* {val.name + ": "}</Text>
@@ -202,23 +202,6 @@ const ResumeDownloadScreen = () => {
 
           </View>
 
-          {/* <View style={{ padding: 10 }} >
-            <Text style={{ fontSize: 13, fontWeight: "600", color: "black" }} >Projects</Text>
-
-            {resume.Projects.projects.map((val, index) => (
-              <View key={index} >
-
-                <Text style={{ color: "black", fontSize: 11 }} >{val.projectName}</Text>
-                <Text style={{ color: "black", fontSize: 11 }} >{val.projectLink}</Text>
-                <Text style={{ color: "black", fontSize: 11 }} >{val.projectDescription}</Text>
-              </View>
-
-            ))}
-
-
-          </View> */}
-
-
 
         </View> : "" )
         
@@ -226,7 +209,7 @@ const ResumeDownloadScreen = () => {
 
       <View style={{ position: "absolute", bottom: 50, right: 50 }} >
         <TouchableOpacity activeOpacity={0.6} onPress={captureViewShot} >
-          <MaterialIcons name='file-download' size={50} color={"#54B435"} />
+          <MaterialIcons style={{borderWidth:0.6,borderColor:"#E6D2AA",borderRadius:10}} name='file-download' size={50} color={"#42032C"} />
         </TouchableOpacity>
       </View>
     </View>

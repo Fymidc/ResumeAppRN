@@ -1,5 +1,5 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert ,ActivityIndicator} from 'react-native'
+import React, { useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup"
 import Man from "../../images/man.svg"
@@ -10,37 +10,41 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Auth, AuthStackParamList } from '../../types';
 import auth from "@react-native-firebase/auth"
 type AuthScreenNavigationProp = NativeStackNavigationProp<
-AuthStackParamList,
-"Register"
+  AuthStackParamList,
+  "Register"
 >
 
 const SignupScreen = () => {
 
-    const navigation = useNavigation<AuthScreenNavigationProp>()
+  const navigation = useNavigation<AuthScreenNavigationProp>()
+  const [loading, setloading] = useState(false)
 
-  const register = (values:Auth,{setsubmitting,resetForm}:any) => {
+  const register = (values: Auth, { setsubmitting, resetForm }: any) => {
+    setloading(true)
     try {
-       auth().createUserWithEmailAndPassword(values.email,values.password).then(() => {
+      auth().createUserWithEmailAndPassword(values.email, values.password).then(() => {
         resetForm({})
-       
+        setloading(false)
       })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          alert("That email address is already in use!")
-        }
-    
-        if (error.code === 'auth/invalid-email') {
-          alert("That email address is invalid!")
-          setsubmitting(false)
-        }
-    
-    
-      })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            Alert.alert("That email address is already in use!")
+            setloading(false)
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            Alert.alert("That email address is invalid!")
+            setloading(false)
+            setsubmitting(false)
+          }
+
+
+        })
     } catch (error) {
-     
+
       setsubmitting(false)
-    }    
-  
+    }
+
   }
   return (
     <View style={style.container} >
@@ -55,7 +59,7 @@ const SignupScreen = () => {
         <Man width="70%" height="60%" />
       </View>
       <View style={style.header} >
-        <Text style={{top: -70, fontSize: 32, color: "black",fontFamily:"arial_narrow_7"}} >Sign up</Text>
+        <Text style={{ top: -70, fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Sign up</Text>
       </View>
       <Formik
 
@@ -71,10 +75,10 @@ const SignupScreen = () => {
           })
         }
       >
-        {({ values, handleSubmit, errors, handleChange,isValid,isSubmitting }) => (
-          <View style={{width:"100%",paddingHorizontal:30,justifyContent:"center"}} >
+        {({ values, handleSubmit, errors, handleChange, isValid, isSubmitting }) => (
+          <View style={{ width: "100%", paddingHorizontal: 30, justifyContent: "center" }} >
             <View style={style.inputContainer}  >
-            <View style={{
+              <View style={{
                 flexDirection: "row",
                 alignItems: "center",
                 width: "100%",
@@ -96,7 +100,7 @@ const SignupScreen = () => {
               {(errors.email) && <Text style={style.error} >{errors.email}</Text>}
             </View>
             <View style={style.inputContainer}  >
-            <View style={{
+              <View style={{
                 flexDirection: "row",
                 alignItems: "center",
                 borderBottomWidth: 1,
@@ -117,24 +121,26 @@ const SignupScreen = () => {
               {(errors.password) && <Text style={style.error} >{errors.password}</Text>}
             </View>
             <View style={style.inputContainer} >
-              <TouchableOpacity 
-              style={style.button}
-              activeOpacity={0.7}
-              disabled={!isValid || isSubmitting}
-              onPress={handleSubmit} > 
-
-                <Text style={{fontSize:18,fontWeight:"700",color:"white"}} >Register</Text>
+              <TouchableOpacity
+                style={style.button}
+                activeOpacity={0.7}
+                disabled={!isValid || isSubmitting}
+                onPress={handleSubmit} >
+                {loading
+                  ? <ActivityIndicator size={24} color={"white"} />
+                  : <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Register</Text>
+                }
               </TouchableOpacity>
               <View style={{ flexDirection: "row", top: 20, justifyContent: "center" }} >
 
                 <Text style={{ textAlign: "center" }} >Do you have an account? </Text>
-                <TouchableOpacity activeOpacity={0.7}  onPress={()=>navigation.navigate("Login")} >
+                <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Login")} >
 
                   <Text style={{ textAlign: "center", color: "#2F58CD" }} >Login here..</Text>
                 </TouchableOpacity>
               </View>
             </View>
-            
+
           </View>
         )}
       </Formik>
@@ -181,7 +187,3 @@ const style = StyleSheet.create({
     color: "red"
   }
 })
-
-function alert(arg0: string) {
-  throw new Error('Function not implemented.');
-}

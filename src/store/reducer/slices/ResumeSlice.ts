@@ -123,20 +123,12 @@ export const createResume = createAsyncThunk('resume/createResume', async (data:
 
   return data;
 
-  // payload: {
 
-  //   id: nanoid(),
-  //   createInfo: {
-  //     ...data.createInfo,
-  //     date: new Date().toISOString(),
-  //     isUpdated: false,
-  //   },
-  // },
 
 
 })
 
-//create yaparken id oluştur
+
 
 export const GetResume = createAsyncThunk('resume/GetResume', async () => {
 
@@ -145,7 +137,7 @@ export const GetResume = createAsyncThunk('resume/GetResume', async () => {
     .collection("resumes").get()
 
   snapshot.forEach((doc) => {
-     //console.log(doc.data().data)
+     
     resumearray.push(doc.data().data)
 
   })
@@ -153,9 +145,7 @@ export const GetResume = createAsyncThunk('resume/GetResume', async () => {
   return resumearray
 })
 export const UpdateResume = createAsyncThunk('resume/UpdateResume', async (data: Resume) => {
-// const ndata = JSON.parse(JSON.stringify(data))
-// console.log("data.id",ndata.data.id)
-//console.log(data.data.id)  
+
 
 firestore()
     .collection('resumes')
@@ -170,7 +160,6 @@ firestore()
   return data
 })
 
-//export const selectAllResumes = (state: any) => state.createResume
 
 
 

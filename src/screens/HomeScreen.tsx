@@ -130,17 +130,17 @@ const HomeScreen = () => {
   const dispatch = useAppDispatch();
   
   const resumes = useAppSelector(state => state.reducer);
-//state kırmızı düzelt
+
 
   const navigation = useNavigation<HomeScreenNavigationProp>()
 
-  //console.log("resume",resumes)
+ 
   let lastCreatedResume: Resume | undefined;
 
   const createScreen = () => {
    
     setresumeCreted(true)
-    console.log("create called")
+    
     dispatch(createResume(initialValue))
   }
   const getData = async () => {
@@ -158,22 +158,18 @@ const HomeScreen = () => {
   
 
 
-  // const isfocused = useIsFocused()
-
   useEffect(() => {
     dispatch(GetResume())
     getData()
     lastCreatedResume = resumes?.resumes.slice(-1)[0];
-    console.log("lastcreated", lastCreatedResume)
+    
     if (resumeCreted) {
       setTimeout(() => {
         navigation.navigate("ResumeCreate", { id: lastCreatedResume?.id })
       }, 500);
     }
   }, [resumeCreted])
-  //last created kısmıında id hemen create screene geçmiyor
-//hatayı düzelt resumes den gelen get isteğini düzenle
-console.log("home resumes", resumes)
+ 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }} >
       <Header />

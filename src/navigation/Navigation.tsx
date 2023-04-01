@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -79,7 +79,7 @@ function TabStack() {
 
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false ,tabBarHideOnKeyboard:true}}
       initialRouteName="HomeTab"
       tabBar={props => <CustomtabBar {...props} /> }
      
@@ -130,8 +130,9 @@ function AuthStack() {
 const Navigation = () => {
 
   const [signedin, setsignedin] = useState(false)
-
+  
   useEffect(() => {
+   
     auth().onAuthStateChanged(user => {
       if (user) {
         AsyncStorage.setItem('key', user.uid)
@@ -152,7 +153,7 @@ const Navigation = () => {
 
       // tabBar={props => <StackBar {...props} />}
       >
-        {signedin ? <Stack.Screen name="Home" component={TabStack} />
+        { signedin ? <Stack.Screen name="Home" component={TabStack} />
           :
           <Stack.Screen name="Auth" component={AuthStack} />
         }
