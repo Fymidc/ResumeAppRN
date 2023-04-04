@@ -16,7 +16,7 @@ Users can create account and save their resumes and if they want they can update
 
 ## Google Play Store :
 
-[![Get it on Google Play](https://play.google.com/store/apps/details?id=com.footyapp)
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.footyapp)
 
 Screenshots of the app :
 ![cv-builder](https://user-images.githubusercontent.com/60707082/229289803-1f56ea6d-6a18-4b2e-9c2c-54384d6cc21d.jpg)
