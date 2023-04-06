@@ -1,4 +1,4 @@
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
 import { RouteProp, useNavigation } from '@react-navigation/native'
@@ -34,7 +34,7 @@ type Props = {
 
 const UserScreen = ({ route, navigation }: Props) => {
 
-  console.log(route.name)
+  //console.log(route.name)
   const [userid, setuserid] = useState("")
   // const navigation = useNavigation()
   const dispatch = useAppDispatch();
@@ -52,12 +52,7 @@ const UserScreen = ({ route, navigation }: Props) => {
   }
 
   const resumes = useAppSelector(state => state.reducer);
-  //state kırmızı düzelt
-
-  //console.log("profile ekranıundan gelen resumeler",resumes.map((val:any)=>console.log(val)))
-  // const consol = resumes?.map((val:Resume)=>console.log(val.data.data.id))
-
-  console.log("consol2", resumes)
+  
 
   React.useEffect(
     () =>
@@ -74,24 +69,37 @@ const UserScreen = ({ route, navigation }: Props) => {
       }));
 
   useEffect(() => {
-    dispatch(GetResume())
+    dispatch(GetResume(userid))
     getData()
   }, [resumes.resumes.length])
 
+//resume siliniyor ancak sayfada state refresh etmiyor. 
+
   const userName = resumes?.resumes[0]?.mainInfo.name
-  //resumes.map undefined hatası var yeni resume create ederken
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
 
       <Header navigation={navigation} userName={userName} />
 
-      <View style={{flex:1, marginTop: 20 }} >
+      <View style={{flex:10, marginTop: 20 }} >
         <Text style={{ paddingHorizontal: 20, fontSize: 20, color: "black",fontFamily:"Anton-Regular", }} >My CV's</Text>
-        <View style={{ padding: 10, flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }} >
-          {resumes.loading === true ? <ActivityIndicator size={25} color={"green"} /> : resumes.resumes?.map((value: Resume, index: number) => (
-            (value.userid === userid ? <MyResumes key={index} id={value.id} /> : "")
+        <View style={{ flex:1,padding: 15 ,flexWrap:"wrap"}} >
+         <View style={{flex:1,flexDirection:"row",justifyContent:"space-around"}} >
+
+          <ScrollView  contentContainerStyle={{flex:1,flexDirection:"row",flexWrap:"wrap",justifyContent:"space-evenly"}} >
+            {resumes.loading === true ? <ActivityIndicator size={25} color={"green"} /> : resumes.resumes?.map((value: Resume, index: number) => (
+            (value.userid === userid ? 
+              
+
+                <MyResumes key={index} id={value.id} /> 
+             
+            
+            : "")
 
           ))}
+          </ScrollView>
+         </View>
+          
 
 
 

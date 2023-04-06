@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import MainScreen from "../images/mainscreen.svg"
@@ -35,149 +35,153 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 const HomeScreen = () => {
   const [userid, setuserid] = useState("")
 
-//initial values 
- const initialValue = {
-  id: nanoid(),
-  userid:userid,
-  resumeName: "resume1",
- 
-  createInfo: {
-    date: new Date().toISOString(),
-    isUpdated: false,
-  },
-  mainInfo: {
-    sectionName: "mainInfo",
-    name: "",
-    phone: "",
-    city: "",
-    jobTitle: "",
-    email: "",
-    links: [
-      {
-        name: "",
-        url: "",
-      },
-    ],
-  },
-  profileInfo: {
-    sectionName: "",
-    profileDescription: "",
-  },
-  educationInfo: {
-    sectionName: "profileInfo",
-    educations: [
-      {
-        schoolName: "",
-        degree: "",
-        fieldOfStudy: "",
-        startDate: "",
-        endDate: "",
-        schoolCity: "",
-        schoolCountry: ""
-      }
-    ]
+  //initial values 
+  const initialValue = {
+    id: nanoid(),
+    userid: userid,
+    resumeName: "resume1",
 
-  },
-  ExperienceInfo: {
-    sectionName: "experienceInfo",
-    experiences: [
+    createInfo: {
+      date: new Date().toISOString(),
+      isUpdated: false,
+    },
+    mainInfo: {
+      sectionName: "mainInfo",
+      name: "",
+      phone: "",
+      city: "",
+      jobTitle: "",
+      email: "",
+      links: [
+        {
+          name: "",
+          url: "",
+        },
+      ],
+    },
+    profileInfo: {
+      sectionName: "",
+      profileDescription: "",
+    },
+    educationInfo: {
+      sectionName: "profileInfo",
+      educations: [
+        {
+          schoolName: "",
+          degree: "",
+          fieldOfStudy: "",
+          startDate: "",
+          endDate: "",
+          schoolCity: "",
+          schoolCountry: ""
+        }
+      ]
 
-      {
-        companyName: "",
-        position: "",
-        jobTitle: "",
-        startDate: "",
-        endDate: "",
-        jobDescription: ""
-      }
-    ],
-  },
-  Skills: {
-    sectionName: "Skills",
-    skills: [
-      {
-        skillName: "",
-        skillLevel: "",
-      },
-    ],
-  },
-  Languages: {
-    sectionName: "languages",
-    languages: [
-      {
-        languageName: "",
-        languageLevel: "",
-      },
-    ],
-  },
-  Projects: {
-    sectionName: "projects",
-    projects: [
-      {
-        projectName: "",
-        projectDescription: "",
-        projectLink: "",
-      },
-    ],
-  }
+    },
+    ExperienceInfo: {
+      sectionName: "experienceInfo",
+      experiences: [
 
-};
+        {
+          companyName: "",
+          position: "",
+          jobTitle: "",
+          startDate: "",
+          endDate: "",
+          jobDescription: ""
+        }
+      ],
+    },
+    Skills: {
+      sectionName: "Skills",
+      skills: [
+        {
+          skillName: "",
+          skillLevel: "",
+        },
+      ],
+    },
+    Languages: {
+      sectionName: "languages",
+      languages: [
+        {
+          languageName: "",
+          languageLevel: "",
+        },
+      ],
+    }
+
+  };
 
 
 
   const [resumeCreted, setresumeCreted] = useState(false)
- 
+  const [loading, setloading] = useState(false)
+
   const dispatch = useAppDispatch();
-  
+
   const resumes = useAppSelector(state => state.reducer);
 
 
   const navigation = useNavigation<HomeScreenNavigationProp>()
 
- 
+
   let lastCreatedResume: Resume | undefined;
 
   const createScreen = () => {
-   
+setloading(true)
     setresumeCreted(true)
-    
+
     dispatch(createResume(initialValue))
   }
   const getData = async () => {
     try {
       const key = await AsyncStorage.getItem('key')
-      if(key !== null) {
+      if (key !== null) {
         setuserid(key)
-        console.log("home dan gelen user id",key)
+        console.log("home dan gelen user id", key)
         // value previously stored
       }
-    } catch(e) {
+    } catch (e) {
       // error reading value
     }
   }
-  
+
 
 
   useEffect(() => {
-    dispatch(GetResume())
+    dispatch(GetResume(userid))
     getData()
-    lastCreatedResume = resumes?.resumes.slice(-1)[0];
+    const userData: Resume[] = resumes?.resumes.filter((val:Resume)=>val.userid === userid)
+    console.log("userdata",userData.slice(-1))
     
-    if (resumeCreted) {
+    //lastCreatedResume = resumes?.resumes.map((val:Resume) => )
+   // console.log("last created",lastCreatedResume)
+   // setloading(false)
+    if (resumeCreted ) {
+     // setloading(true)
+      lastCreatedResume = userData[userData.length - 1];
+      setloading(true)
       setTimeout(() => {
-        navigation.navigate("ResumeCreate", { id: lastCreatedResume?.id })
-      }, 500);
+       
+//create basınca loading göster
+setloading(false)
+          navigation.navigate("ResumeCreate", { id: lastCreatedResume?.id })
+        
+      }, 1000);
     }
+    //fix the issue after create an resume it gets the old one
+    setresumeCreted(false)
   }, [resumeCreted])
- 
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }} >
       <Header />
 
       <View style={{ flex: 1, alignItems: "center" }} >
-        <Text style={{ fontSize: 30, paddingHorizontal: 20, fontFamily:"arial_narrow_7",color: "black", textAlign: "center" }} >Build your cv for new adventures</Text>
+        <Text style={{ fontSize: 30, paddingHorizontal: 20, fontFamily: "arial_narrow_7", color: "black", textAlign: "center" }} >Build your cv for new adventures</Text>
         <View style={{
-
+          flex: 5,
           marginTop: 15,
           height: 350,
           width: "95%",
@@ -190,7 +194,7 @@ const HomeScreen = () => {
 
 
         <View style={styles.inputContainer} >
-          <Text style={{ marginVertical: 15, fontSize: 20, fontFamily:"arial_narrow_7", color: "black" }} >
+          <Text style={{ marginVertical: 15, fontSize: 20, fontFamily: "arial_narrow_7", color: "black" }} >
             Let's create a new CV
           </Text>
           <TouchableOpacity
@@ -198,18 +202,21 @@ const HomeScreen = () => {
             activeOpacity={0.7}
 
             onPress={() => createScreen()}  >
-
-            <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Next</Text>
+            {loading
+              ? <ActivityIndicator color={"white"} size={24} />
+              : <Text style={{ fontSize: 18, fontWeight: "700", color: "white" }} >Next</Text>
+            }
           </TouchableOpacity>
         </View>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.FULL_BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
       </View>
-      <BannerAd
-                unitId={adUnitId}
-                size={BannerAdSize.FULL_BANNER}
-                requestOptions={{
-                    requestNonPersonalizedAdsOnly: true,
-                }}
-            />
+
     </View>
   )
 }
@@ -217,7 +224,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   inputContainer: {
     width: "50%",
-    
+    flex: 3,
     alignItems: "center"
   },
   button: {

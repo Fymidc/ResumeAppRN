@@ -45,10 +45,10 @@ const ResumeDownloadScreen = () => {
       });
       console.log(uri)
       CameraRoll.save(uri,{type:"photo",album:"QR codes"})
-      Alert.alert('Success', 'Resume Downloaded.');
+      Alert.alert('Success', 'Resume downloaded to your gallery.');
      
     } catch (error) {
-      Alert.alert('Error', 'Failed to capture image');
+      Alert.alert('Error', 'Failed to Download');
     }
   }
 
@@ -81,31 +81,31 @@ const ResumeDownloadScreen = () => {
       {resumes.resumes?.map((resume: Resume , index:number) => (
         (resume.userid === userid ?<View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
          key={index} >
-          <View style={{ padding: 10 }} >
+          <View style={{ padding: 10 ,backgroundColor:"#2D2727",margin:5}} >
 
-            <Text style={{ fontSize: 20, fontWeight: "700", color: "black", textAlign: "center" }} >{resume.mainInfo?.name}</Text>
-            <Text style={{ fontSize: 16, fontWeight: "600", color: "black", textAlign: "center", padding: 8 }} >{resume.mainInfo?.jobTitle}</Text>
+            <Text style={{ fontSize: 20, fontWeight: "700", color: "white", textAlign: "center" }} >{resume.mainInfo?.name}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "600", color: "white", textAlign: "center", padding: 2 }} >{resume.mainInfo?.jobTitle}</Text>
 
             <View style={{ flexDirection: "row" }} >
-              <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >E-mail:</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.email}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "white" }}  >E-mail:</Text>
+              <Text style={{ fontSize: 10, fontWeight: "500", color: "white", paddingHorizontal: 4 }} >{resume.mainInfo?.email}</Text>
             </View>
 
             <View style={{ flexDirection: "row" }} >
-              <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >Phone:</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.phone}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "white" }}  >Phone:</Text>
+              <Text style={{ fontSize: 10, fontWeight: "500", color: "white", paddingHorizontal: 4 }} >{resume.mainInfo?.phone}</Text>
             </View>
 
             <View style={{ flexDirection: "row" }} >
-              <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }}  >City</Text>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: "black", paddingHorizontal: 4 }} >{resume.mainInfo?.city}</Text>
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "white" }}  >City</Text>
+              <Text style={{ fontSize: 10, fontWeight: "500", color: "white", paddingHorizontal: 4 }} >{resume.mainInfo?.city}</Text>
             </View>
 
             {resume.mainInfo?.links.map((val:any, index:number) => (
               <View style={{ flexDirection: "row" }} key={index} >
 
-                <Text style={{ fontSize: 11, fontWeight: "700", color: "#1F8A70" }} >* {val.name + ": "}</Text>
-                <Text style={{ fontSize: 11, fontWeight: "600", color: "black" }} > {val.url}</Text>
+                <Text style={{ fontSize: 11, fontWeight: "800", color: "white" }} >* {val.name + ": "}</Text>
+                <Text style={{ fontSize: 10, fontWeight: "500", color: "white" }} > {val.url}</Text>
               </View>
             ))}
 
@@ -113,12 +113,12 @@ const ResumeDownloadScreen = () => {
           <View style={{ padding: 10 }} >
 
             <Text style={styles.titles} >Profile Summary</Text>
-            <Text style={{ fontSize: 12, color: "black" }} >{resume.profileInfo?.profileDescription}</Text>
+            <Text style={{ fontSize: 12, color: "black",paddingHorizontal:5 }} >{resume.profileInfo?.profileDescription}</Text>
 
           </View>
           <View style={{ padding: 10 }} >
             <Text style={styles.titles} >Skills & Languages</Text>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 20 }} >
+            <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }} >
 
               <View  >
 
@@ -145,12 +145,12 @@ const ResumeDownloadScreen = () => {
 
           </View>
 
-          {/* açıklamalara başlık ekle company name gibi  */}
+          
           <View style={{ padding: 10 }} >
             <Text style={styles.titles} >Experiences</Text>
             {resume.ExperienceInfo?.experiences?.map((val:any, index:number) => (
-              // design kayması var düzenle
-              <View style={{ paddingVertical: 3 }} key={index} >
+              
+              <View style={{ paddingVertical: 3,paddingHorizontal:5 }} key={index} >
                 <View style={{ flexDirection: "row" }} >
                   <Text style={{ color: "#1F8A70", fontSize: 11, fontWeight: "600" }}  >Company name:</Text>
                   <Text style={{ color: "black", fontSize: 12, paddingHorizontal: 6 }} >{val.companyName}</Text>
@@ -177,7 +177,7 @@ const ResumeDownloadScreen = () => {
             <Text style={styles.titles} >Education</Text>
 
             {resume.educationInfo?.educations?.map((val:any, index:number) => (
-              <View style={{ paddingVertical: 3 }} key={index} >
+              <View style={{ paddingVertical: 3,paddingHorizontal:5 }} key={index} >
 
                 <View style={{ flexDirection: "row" }} >
                   <Text style={{ color: "#1F8A70", fontWeight: "600", fontSize: 11 }} >School Name:</Text>

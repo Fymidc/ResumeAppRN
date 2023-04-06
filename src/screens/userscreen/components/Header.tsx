@@ -23,11 +23,12 @@ const Header = (props: Props) => {
         <View style={{ flexDirection: "row",
          justifyContent: "center",
           alignItems: "center" ,
-          paddingVertical:15,
+         marginVertical:5,
           borderBottomWidth:0.5,
+          flex:1,
           elevation:0.1}} >
 
-            <View style={{ alignItems: "center", padding: 10}}  >
+            <View style={{ alignItems: "center"}}  >
 
                 
                 <Text style={{ fontSize: 21,letterSpacing:1, color: "black",fontFamily:"Anton-Regular" }} >PROFILE</Text>

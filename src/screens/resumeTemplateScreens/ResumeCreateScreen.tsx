@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import ProgressBar from "./components/ProgressBar";
 import { FormikValueProps, Resume, StackParamList } from '../../types';
-import EmptyResume from "../../images/emptyimage.svg"
+import EmptyResume from "../../images/resume.svg"
 
 import { FieldArray, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup'
@@ -49,7 +49,7 @@ const ResumeCreateScreen = (props: Props) => {
     "Experience Info",
     "Social Media",
     "Skills&Languages",
-    "Projects",
+    
     "Download",
   ];
   const tabPercentRate = 100 / allTabs.length;
@@ -170,6 +170,7 @@ const ResumeCreateScreen = (props: Props) => {
                             style={styles.input}
                             placeholder='Email'
                             autoCapitalize='none'
+                            keyboardType='email-address'
                             value={values.mainInfo.email}
                             onChangeText={handleChange("mainInfo.email")}
 
@@ -266,7 +267,9 @@ const ResumeCreateScreen = (props: Props) => {
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Start Date</Text>
                                     <TextInput
                                       style={styles.input}
-                                      placeholder='Start Date'
+                                      placeholder='00/00/0000'
+                                      keyboardType='number-pad'
+                                      maxLength={10}
                                       autoCapitalize='none'
                                       value={values.educationInfo.educations[`${index}`].startDate}
                                       onChangeText={handleChange(`educationInfo.educations[${index}].startDate`)}
@@ -278,8 +281,9 @@ const ResumeCreateScreen = (props: Props) => {
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >End date</Text>
                                     <TextInput
                                       style={styles.input}
-                                      placeholder='End date'
-
+                                      placeholder='00/00/0000'
+                                      keyboardType='number-pad'
+                                      maxLength={10}
                                       value={values.educationInfo.educations[`${index}`].endDate}
                                       onChangeText={handleChange(`educationInfo.educations[${index}].endDate`)}
 
@@ -375,7 +379,9 @@ const ResumeCreateScreen = (props: Props) => {
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >Start Date</Text>
                                     <TextInput
                                       style={styles.input}
-                                      placeholder='Start Date'
+                                      placeholder='00/00/0000'
+                                      keyboardType='number-pad'
+                                      maxLength={10}
                                       autoCapitalize='none'
                                       value={values.ExperienceInfo.experiences[`${index}`].startDate}
                                       onChangeText={handleChange(`ExperienceInfo.experiences[${index}].startDate`)}
@@ -387,8 +393,9 @@ const ResumeCreateScreen = (props: Props) => {
                                     <Text style={{ fontSize: 19, fontWeight: "700" }} >End date</Text>
                                     <TextInput
                                       style={styles.input}
-                                      placeholder='End date'
-
+                                      placeholder='00/00/0000'
+                                      keyboardType='number-pad'
+                                      maxLength={10}
                                       value={values.ExperienceInfo.experiences[`${index}`].endDate}
                                       onChangeText={handleChange(`ExperienceInfo.experiences[${index}].endDate`)}
 
@@ -481,7 +488,7 @@ const ResumeCreateScreen = (props: Props) => {
                                     <TextInput
                                       style={styles.input}
                                       placeholder='Link Url'
-
+                                      keyboardType='url'
                                       value={values.mainInfo.links[`${index}`].url}
                                       onChangeText={handleChange(`mainInfo.links[${index}].url`)}
 
@@ -677,96 +684,7 @@ const ResumeCreateScreen = (props: Props) => {
 
                       </ScrollView>
                     }
-                    {/* project section */}
-                    {selectedTab == "Projects" &&
-
-                      <ScrollView showsVerticalScrollIndicator={false} bounces>
-                        <FieldArray
-                          name='Projects.projects'
-                          render={(arrayAdder) => (
-
-                            <View >
-                              {values.Projects.projects.map((projects: any, index: number) => (
-
-                                <View key={index} >
-
-                                  <View style={styles.inputContainer}  >
-                                    <Text style={{ fontSize: 19, fontWeight: "700" }} >Project Name</Text>
-                                    <TextInput
-                                      style={styles.input}
-                                      placeholder='Project Name'
-                                      autoCapitalize='none'
-                                      value={values.Projects.projects[`${index}`].projectName}
-                                      onChangeText={handleChange(`Projects.projects[${index}].projectName`)}
-
-                                    />
-                                    {(errors.projectname) && <Text style={styles.error} >{errors.projectname}</Text>}
-                                  </View>
-                                  <View style={styles.inputContainer}  >
-                                    <Text style={{ fontSize: 19, fontWeight: "700" }} >Project Link</Text>
-                                    <TextInput
-                                      style={styles.input}
-                                      placeholder='Project Link'
-
-                                      value={values.Projects.projects[`${index}`].projectLink}
-                                      onChangeText={handleChange(`Projects.projects[${index}].projectLink`)}
-
-                                    />
-                                    {(errors.projectlink) && <Text style={styles.error} >{errors.projectlink}</Text>}
-
-
-                                  </View>
-                                  <View style={styles.inputContainer}  >
-                                    <Text style={{ fontSize: 19, fontWeight: "700" }} >Project Description</Text>
-                                    <TextInput
-                                      style={styles.input}
-                                      placeholder="Tell us about your project"
-                                      autoCapitalize='none'
-                                      value={values.Projects.projects[`${index}`].projectDescription}
-                                      onChangeText={handleChange(`Projects.projects[${index}].projectDescription`)}
-
-                                    />
-                                    {(errors.projectdescription) && <Text style={styles.error} >{errors.projectdescription}</Text>}
-                                  </View>
-                                  <View style={{ flex: 1, justifyContent: "center" }} >
-                                    {values.Projects.projects.length > 1 ? (<TouchableOpacity
-                                      onPress={() => arrayAdder.remove(index)}
-                                      style={{
-                                        backgroundColor: "red",
-                                        flex: 1,
-                                        padding: 12,
-                                        alignItems: "center"
-                                      }} >
-                                      <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Remove</Text>
-
-                                    </TouchableOpacity>) : ""}
-
-                                    <TouchableOpacity
-                                      onPress={() => arrayAdder.push({
-                                        projectName: "",
-                                        projectDescription: "",
-                                        projectLink: "",
-                                      })}
-                                      style={{
-                                        backgroundColor: "green",
-                                        flex: 1,
-                                        padding: 12,
-                                        marginVertical: 5,
-                                        alignItems: "center"
-                                      }} >
-                                      <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }} >Add</Text>
-                                    </TouchableOpacity>
-                                  </View>
-
-                                </View>
-                              ))}
-                            </View>
-                          )}
-                        />
-
-
-                      </ScrollView>
-                    }
+                   
 
                     {selectedTab == "Download" &&
 

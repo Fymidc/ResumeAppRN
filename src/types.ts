@@ -51,7 +51,7 @@ export interface Resume {
   ExperienceInfo?: ExperienceInfo;
   Skills: Skills;
   Languages: Languages;
-  Projects: Projects;
+ // Projects: Projects;
 
 }
 
@@ -138,16 +138,16 @@ export interface Language {
   languageLevel: string;
 }
 
-export interface Projects {
-  sectionName: string;
-  projects: Project[];
-}
+// export interface Projects {
+//   sectionName: string;
+//   projects: Project[];
+// }
 
-export interface Project {
-  projectName: string;
-  projectDescription: string;
-  projectLink: string;
-}
+// export interface Project {
+//   projectName: string;
+//   projectDescription: string;
+//   projectLink: string;
+// }
 
 
 

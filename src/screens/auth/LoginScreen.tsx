@@ -78,8 +78,8 @@ const LoginScreen = () => {
       </View>
       <View style={style.header} >
 
-        <Text style={{ top: -70, fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Login</Text>
       </View>
+
       <Formik
 
         initialValues={{
@@ -95,8 +95,10 @@ const LoginScreen = () => {
         }
       >
         {({ values, handleSubmit, errors, handleChange, isValid, isSubmitting }) => (
-          <View style={{ width: "100%", paddingHorizontal: 30, justifyContent: "center" }} >
+          <View style={{flex:1, width: "100%", paddingHorizontal: 30, justifyContent: "center" }} >
+
             <View style={style.inputContainer}  >
+                    <Text style={{  fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Login</Text>
 
               <View style={{
                 flexDirection: "row",

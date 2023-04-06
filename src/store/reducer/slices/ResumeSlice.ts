@@ -86,6 +86,27 @@ const resumeActionSlice = createSlice({
         }
 
       }),
+      builder.addCase(DeleteResume.pending, (state, action) => {
+       return{
+        
+         ...state,
+ 
+         loading : true,
+         error : null
+       }
+    
+
+      }),
+      builder.addCase(DeleteResume.fulfilled, (state, action) => {
+       return{
+        ...state,
+         loading : false,
+        error :null,
+        resumes :state.resumes.filter((resume) => resume.id !== action.payload),
+       
+       }
+
+      }),
 
       builder.addCase(GetResume.pending, (state, action) => {
 
@@ -96,12 +117,18 @@ const resumeActionSlice = createSlice({
         }
       })
       builder.addCase(GetResume.fulfilled, (state, action) => {
-
+        // const createdResume = action.payload
+        // const index = state.resumes.findIndex((user) => user.userid === createdResume.userid);
+        
+        // if (index !== -1) {
+          
         return {
           ...state,
           loading:false,
           resumes: action.payload
         }
+        
+       
       })
   },
 
@@ -130,20 +157,24 @@ export const createResume = createAsyncThunk('resume/createResume', async (data:
 
 
 
-export const GetResume = createAsyncThunk('resume/GetResume', async () => {
+export const GetResume = createAsyncThunk('resume/GetResume', async (id:string) => {
 
   const resumearray: any = []
   const snapshot = await firestore()
     .collection("resumes").get()
 
   snapshot.forEach((doc) => {
+    
+  // const data = doc.data().data.filter((val:Resume) => val.userid !== id)
+  // console.log("get resume",data)
+  resumearray.push(doc.data().data)
      
-    resumearray.push(doc.data().data)
 
   })
 
   return resumearray
 })
+
 export const UpdateResume = createAsyncThunk('resume/UpdateResume', async (data: Resume) => {
 
 
@@ -158,6 +189,21 @@ firestore()
     });
 
   return data
+})
+
+export const DeleteResume = createAsyncThunk('resume/DeleteResume', async (id:string) => {
+
+
+   firestore()
+  .collection('resumes')
+  .doc(`${id}`)
+  .delete()
+  .then(() => {
+    console.log('User deleted!');
+  });
+
+  return id
+  
 })
 
 

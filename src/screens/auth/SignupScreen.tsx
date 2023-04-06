@@ -59,7 +59,6 @@ const SignupScreen = () => {
         <Man width="70%" height="60%" />
       </View>
       <View style={style.header} >
-        <Text style={{ top: -70, fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Sign up</Text>
       </View>
       <Formik
 
@@ -76,8 +75,10 @@ const SignupScreen = () => {
         }
       >
         {({ values, handleSubmit, errors, handleChange, isValid, isSubmitting }) => (
-          <View style={{ width: "100%", paddingHorizontal: 30, justifyContent: "center" }} >
+          <View style={{flex:1, width: "100%", paddingHorizontal: 30, justifyContent: "center" }} >
             <View style={style.inputContainer}  >
+            <Text style={{  fontSize: 32, color: "black", fontFamily: "arial_narrow_7" }} >Sign up</Text>
+
               <View style={{
                 flexDirection: "row",
                 alignItems: "center",
