@@ -64,10 +64,19 @@ const resumeActionSlice = createSlice({
 
   },
   extraReducers(builder) {
+    
+    builder.addCase(createResume.pending, (state, action) => {
+
+      state.loading = true;
+      state.error = null;
+   
+
+    }),
     builder.addCase(createResume.fulfilled, (state, action: PayloadAction<Resume>) => {
 
-       state.resumes.push(action.payload)
-   
+      // state.resumes.push(action.payload)
+      state.loading = false;
+      state.resumes.push(action.payload);
 
     }),
       builder.addCase(UpdateResume.pending, (state, action) => {
@@ -157,7 +166,7 @@ export const createResume = createAsyncThunk('resume/createResume', async (data:
 
 
 
-export const GetResume = createAsyncThunk('resume/GetResume', async (id:string) => {
+export const GetResume = createAsyncThunk('resume/GetResume', async () => {
 
   const resumearray: any = []
   const snapshot = await firestore()

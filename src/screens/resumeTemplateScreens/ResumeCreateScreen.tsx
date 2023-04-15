@@ -23,15 +23,17 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 
 const ResumeCreateScreen = (props: Props) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-
+  const {id} = props.route.params
 
   const dispatch = useAppDispatch();
   const resumes = useAppSelector(state => state.reducer);
 
   const selectedResumeArr = resumes.resumes?.filter(
-    (resume: Resume) => resume.id === props?.route.params?.id
+    (resume: Resume) => resume.id === id
   );
 
+  console.log("id",id)
+  console.log(selectedResumeArr[(0)])
 
 
   const submitResume = (data: Resume) => {

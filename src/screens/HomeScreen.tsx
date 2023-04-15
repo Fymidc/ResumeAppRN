@@ -117,6 +117,7 @@ const HomeScreen = () => {
 
   const [resumeCreted, setresumeCreted] = useState(false)
   const [loading, setloading] = useState(false)
+  const [resumeid, setresumeid] = useState<string | null>(null)
 
   const dispatch = useAppDispatch();
 
@@ -128,11 +129,13 @@ const HomeScreen = () => {
 
   let lastCreatedResume: Resume | undefined;
 
-  const createScreen = () => {
-setloading(true)
-    setresumeCreted(true)
-
-    dispatch(createResume(initialValue))
+  const createScreen = async () => {
+    setloading(true)
+   
+   // console.log("created", resumeCreted)
+    const resumeID = await dispatch(createResume(initialValue))
+    //console.log(resumeID.meta.arg.id)
+    setresumeid(resumeID.meta.arg.id)
   }
   const getData = async () => {
     try {
@@ -147,32 +150,31 @@ setloading(true)
     }
   }
 
-
+  
 
   useEffect(() => {
-    dispatch(GetResume(userid))
+
+    dispatch(GetResume())
     getData()
-    const userData: Resume[] = resumes?.resumes.filter((val:Resume)=>val.userid === userid)
-    console.log("userdata",userData.slice(-1))
-    
-    //lastCreatedResume = resumes?.resumes.map((val:Resume) => )
-   // console.log("last created",lastCreatedResume)
-   // setloading(false)
-    if (resumeCreted ) {
-     // setloading(true)
+    const userData: Resume[] = resumes?.resumes.filter((val: Resume) => val.userid === userid)
+    console.log("userdata", userData.slice(-1))
+
+   
+    if (resumeid) {
+      // setloading(true)
       lastCreatedResume = userData[userData.length - 1];
       setloading(true)
       setTimeout(() => {
+
        
-//create basınca loading göster
-setloading(false)
-          navigation.navigate("ResumeCreate", { id: lastCreatedResume?.id })
-        
+        setloading(false)
+        navigation.navigate("ResumeCreate", { id: lastCreatedResume?.id })
+
       }, 1000);
     }
-    //fix the issue after create an resume it gets the old one
+  
     setresumeCreted(false)
-  }, [resumeCreted])
+  }, [resumeid])
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }} >
