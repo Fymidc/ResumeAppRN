@@ -182,7 +182,7 @@ export type StackParamList = {
   Home: undefined
   Profile: undefined
   ResumeCreate: { id: string }
-  ResumeDownload: { firstname: string }
+  ResumeDownload: { resumeId: string }
 };
 
 export type AuthStackParamList = {

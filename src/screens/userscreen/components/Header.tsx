@@ -35,7 +35,7 @@ const Header = (props: Props) => {
 
                
             </View>
-            <View style={{ position:"absolute",right: 30 }} >
+            <View style={{ position:"absolute",right: 40 }} >
                     <AntDesign
                         onPress={() => handleLogout()}
                         name='logout'

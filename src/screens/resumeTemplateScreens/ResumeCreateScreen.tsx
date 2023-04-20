@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import ProgressBar from "./components/ProgressBar";
 import { FormikValueProps, Resume, StackParamList } from '../../types';
-import EmptyResume from "../../images/resume.svg"
+import EmptyResume from "../../images/previewResume.svg"
 
 import { FieldArray, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup'
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import {  UpdateResume } from '../../store/reducer/slices/ResumeSlice';
-
+import { InterstitialAd, TestIds, AdEventType } from 'react-native-google-mobile-ads';
 
 //route. paramdaki veri  paramlist te verildiği için bu şekilde ulaştık
 type Props = NativeStackScreenProps<StackParamList, 'ResumeCreate'>
@@ -20,9 +20,16 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
   'ResumeCreate'
 >
 
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-2976719493824952/9819090558';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 
 const ResumeCreateScreen = (props: Props) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [loaded, setLoaded] = useState(false);
   const {id} = props.route.params
 
   const dispatch = useAppDispatch();
@@ -34,14 +41,17 @@ const ResumeCreateScreen = (props: Props) => {
 
   console.log("id",id)
   console.log(selectedResumeArr[(0)])
-
-
-  const submitResume = (data: Resume) => {
+  
+  //we use callback here for making reduce to usehooks many nore then previous component
+  const submitResume = React.useCallback((data: Resume) => {
+    interstitial.load
+    interstitial.load();
+    interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      interstitial.show();
+    });
     dispatch(UpdateResume(data))
-    navigation.navigate("ResumeDownload", { firstname: data.mainInfo.name })
-
-
-  }
+     navigation.navigate("ResumeDownload", { resumeId: id })
+  }, [interstitial]);
 
 
 
@@ -690,12 +700,12 @@ const ResumeCreateScreen = (props: Props) => {
 
                     {selectedTab == "Download" &&
 
-                      <View style={{ flex: 1 }}>
+                      <View style={{ flex: 1 ,justifyContent:"center",alignItems:"center"}}>
 
 
                         <EmptyResume
-                          width="100%"
-                          height="100%"
+                          width="90%"
+                          height="90%"
 
                         />
 

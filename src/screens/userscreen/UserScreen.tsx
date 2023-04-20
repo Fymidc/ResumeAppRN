@@ -52,7 +52,7 @@ const UserScreen = ({ route, navigation }: Props) => {
   }
 
   const resumes = useAppSelector(state => state.reducer);
-  
+
 
   React.useEffect(
     () =>
@@ -69,11 +69,11 @@ const UserScreen = ({ route, navigation }: Props) => {
       }));
 
   useEffect(() => {
-    dispatch(GetResume(userid))
+    dispatch(GetResume())
     getData()
   }, [resumes.resumes.length])
 
-//resume siliniyor ancak sayfada state refresh etmiyor. 
+  //resume siliniyor ancak sayfada state refresh etmiyor. 
 
   const userName = resumes?.resumes[0]?.mainInfo.name
   return (
@@ -81,25 +81,26 @@ const UserScreen = ({ route, navigation }: Props) => {
 
       <Header navigation={navigation} userName={userName} />
 
-      <View style={{flex:10, marginTop: 20 }} >
-        <Text style={{ paddingHorizontal: 20, fontSize: 20, color: "black",fontFamily:"Anton-Regular", }} >My CV's</Text>
-        <View style={{ flex:1,padding: 15 ,flexWrap:"wrap"}} >
-         <View style={{flex:1,flexDirection:"row",justifyContent:"space-around"}} >
-
-          <ScrollView  contentContainerStyle={{flex:1,flexDirection:"row",flexWrap:"wrap",justifyContent:"space-evenly"}} >
-            {resumes.loading === true ? <ActivityIndicator size={25} color={"green"} /> : resumes.resumes?.map((value: Resume, index: number) => (
-            (value.userid === userid ? 
-              
-
-                <MyResumes key={index} id={value.id} /> 
-             
-            
-            : "")
-
-          ))}
-          </ScrollView>
-         </View>
+      <View style={{ flex: 10, marginTop: 20 }} >
+        <Text style={{ paddingHorizontal: 35, fontSize: 20, color: "black", fontFamily: "Anton-Regular", }} >My CV's</Text>
+        <View style={{ flex:1}} >
           
+
+            <ScrollView contentContainerStyle={{ justifyContent: "space-evenly" }} >
+              {resumes.loading === true ? <ActivityIndicator size={25} color={"green"} /> : resumes.resumes?.map((value: Resume, index: number) => (
+                (value.userid === userid ?
+
+                
+
+                    <MyResumes key={index} id={value.id} date={value.createInfo.date} />
+                  
+
+                  : "")
+
+              ))}
+            </ScrollView>
+          
+
 
 
 

@@ -11,11 +11,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //import CameraRoll from '@react-native-community/cameraroll';
 
 //type Props = NativeStackScreenProps<StackParamList, 'ResumeDownload'>
+type Props = NativeStackScreenProps<StackParamList, 'ResumeDownload'>
 
 
-const ResumeDownloadScreen = () => {
+const ResumeDownloadScreen = (props:Props) => {
   const [userid, setuserid] = useState("")
-
+  const {resumeId} = props.route.params
  
   const viewRef= useRef<View>(null)
 
@@ -79,7 +80,7 @@ const ResumeDownloadScreen = () => {
     <View style={{ flex: 1 }} >
 
       {resumes.resumes?.map((resume: Resume , index:number) => (
-        (resume.userid === userid ?<View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
+        (resume.id === resumeId ?<View style={{ flex: 1,backgroundColor:"white" }} ref={viewRef} 
          key={index} >
           <View style={{ padding: 10 ,backgroundColor:"#2D2727",margin:5}} >
 
