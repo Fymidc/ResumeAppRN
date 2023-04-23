@@ -4,7 +4,6 @@ import EmptyResume from "../../../images/previewResume.svg"
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../../../types';
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useAppDispatch } from '../../../store/store';
 import { DeleteResume } from '../../../store/reducer/slices/ResumeSlice';
 

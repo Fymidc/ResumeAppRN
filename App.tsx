@@ -92,7 +92,6 @@ function App(): JSX.Element {
     });
   };
 
-  //notifiact,on cannot be settled
 
   PushNotification.configure({
     // Called when a remote or local notification is opened or received
